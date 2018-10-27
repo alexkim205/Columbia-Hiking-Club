@@ -1,0 +1,14 @@
+{% extends "blog/base.html" %}
+
+{% block title %}
+Hikes
+{% endblock title %}
+
+{% block content %}
+    <h2>Hikes</h2>
+    <ul>
+        {% for hike in hike_list %}
+            <li><a href="{%  url 'hike_detail' hike.pk %}">{{ hike }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
