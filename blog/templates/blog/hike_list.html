@@ -1,14 +1,23 @@
 {% extends "base.html" %}
 
 {% block title %}
-Hikes
+    Hikes
 {% endblock title %}
 
 {% block content %}
+
+    {% if user.is_authenticated %}
+        Welcome {{ user.username }}!
+        Click <a href="{% url 'logout' %}">here</a> to log out.
+    {% else %}
+        You are not logged in.
+        Click <a href="{% url 'login' %}">here</a> to log in.
+    {% endif %}
+
     <h2>Hikes</h2>
     <ul>
         {% for hike in hike_list %}
-            <li><a href="{%  url 'hike_detail' hike.pk %}">{{ hike }}</a></li>
+            <li><a href="{% url 'hike_detail' hike.pk %}">{{ hike }}</a></li>
         {% endfor %}
     </ul>
 {% endblock %}
