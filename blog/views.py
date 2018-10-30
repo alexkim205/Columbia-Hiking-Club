@@ -19,6 +19,7 @@ class HikePostView(DetailView):
         context = super().get_context_data(**kwargs)
         return context
 
+
 class HikesListView(ListView):
 
     model = Hike

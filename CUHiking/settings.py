@@ -132,3 +132,12 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/hikes/'
 LOGOUT_REDIRECT_URL = '/hikes/'
+EMAIL_USE_TLS = True
+
+# Email Backend
+# https://medium.com/@frfahim/django-registration-with-confirmation-email-bb5da011e4ef
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'cuhiking@gmail.com'
+EMAIL_HOST_PASSWORD = 'golions'
+EMAIL_PORT = 587
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
