@@ -12,7 +12,7 @@ from .forms import *
 class HikePostView(DetailView):
     model = Hike
     context_object_name = 'hike_detail'
-    template_name = 'blog/hike_detail.html'
+    template_name = 'blog/templates/blog/hike_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -22,7 +22,7 @@ class HikePostView(DetailView):
 class HikesListView(ListView):
     model = Hike
     context_object_name = 'hike_list'
-    template_name = 'blog/hike_list.html'
+    template_name = 'blog/templates/blog/hike_list.html'
 
 
 class HikeRequestView(View):

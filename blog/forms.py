@@ -6,7 +6,7 @@ from .models import *
 
 class HikeRequestForm(forms.ModelForm):
     want_to_lead = forms.BooleanField(label='I want to lead the hike')
-    date_of_hike = forms.DateTimeField('%Y-%m-%d %H:%M:%S')
+    # date_of_hike = forms.DateTimeField('%Y-%m-%d %H:%M:%S')
 
     class Meta:
         model = HikeRequest

@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     # 3rd Party
     # 'django_registration',
     # 'pipeline',
-    'rest_framework',
+    'webpack_loader',
 
     # My Apps
     'blog.apps.BlogConfig',
@@ -63,8 +63,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            # os.path.join(BASE_DIR, 'templates')
-            os.path.join(BASE_DIR, 'build')
+            os.path.join(BASE_DIR, 'templates')
         ]
         ,
         'APP_DIRS': True,
@@ -129,7 +128,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
 STATICFILES_DIRS = [
-  os.path.join(BASE_DIR, 'build/static'),
+    os.path.join(BASE_DIR, "static"),
 ]
 
 # User Login/Logout
@@ -149,3 +148,12 @@ EMAIL_HOST_USER = PWD['CLUB_EMAIL']['ADDRESS']
 EMAIL_HOST_PASSWORD = PWD['CLUB_EMAIL']['PASSWORD']
 EMAIL_PORT = PWD['CLUB_EMAIL']['PORT']
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# WEBPACK
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+    }
+}

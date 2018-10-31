@@ -2,20 +2,62 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf327db9-1760-4594-9f3e-12c0de59b534" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/blog/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blog/templates/blog/hike_register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d1d16768-21ef-450d-bcce-36a6f1b11c9c.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CUHiking/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/CUHiking/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/hike_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/hike_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CUHiking/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CUHiking/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CUHiking/wsgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/tokens.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/accounts/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/migrations/0002_auto_20181027_0734.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/migrations/0003_auto_20181027_0745.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/migrations/0004_auto_20181027_0931.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/migrations/0005_auto_20181030_2130.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/migrations/0006_auto_20181030_2132.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/hike_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/hike_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/hike_register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviceWorker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/logged_out.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/password_reset_complete.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/password_reset_confirm.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/password_reset_done.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/password_reset_email.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/password_reset_form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,19 +116,21 @@
           <entry key="Django Console" value="830" />
           <entry key="dummy" value="4" />
           <entry key="gitignore" value="27" />
-          <entry key="html" value="1963" />
-          <entry key="json" value="139" />
-          <entry key="py" value="6184" />
-          <entry key="py@CUHiking" value="394" />
+          <entry key="html" value="1969" />
+          <entry key="js" value="42" />
+          <entry key="json" value="212" />
+          <entry key="py" value="6213" />
+          <entry key="py@CUHiking" value="432" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CommandLine" value="337" />
-          <entry key="HTML" value="1963" />
-          <entry key="JSON" value="139" />
-          <entry key="PLAIN_TEXT" value="88" />
-          <entry key="Python" value="7014" />
+          <entry key="CommandLine" value="373" />
+          <entry key="HTML" value="1969" />
+          <entry key="JSON" value="212" />
+          <entry key="JavaScript" value="42" />
+          <entry key="PLAIN_TEXT" value="90" />
+          <entry key="Python" value="7043" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -94,29 +138,33 @@
           <entry key="auth_group" value="1" />
           <entry key="auth_group_permissions" value="1" />
           <entry key="auth_user" value="1" />
+          <entry key="babelrc" value="2" />
           <entry key="blog_hike" value="1" />
           <entry key="blog_hike_hike_leaders" value="1" />
           <entry key="blog_leader" value="1" />
           <entry key="css" value="2" />
           <entry key="gitignore" value="4" />
-          <entry key="html" value="29" />
-          <entry key="js" value="6" />
-          <entry key="json" value="5" />
+          <entry key="html" value="33" />
+          <entry key="js" value="15" />
+          <entry key="json" value="11" />
           <entry key="lock" value="2" />
-          <entry key="py" value="36" />
+          <entry key="md" value="1" />
+          <entry key="py" value="37" />
           <entry key="sql" value="2" />
           <entry key="svg" value="1" />
+          <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="2" />
           <entry key="Database Element" value="6" />
-          <entry key="HTML" value="29" />
-          <entry key="JSON" value="5" />
-          <entry key="JavaScript" value="6" />
-          <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Python" value="36" />
+          <entry key="HTML" value="33" />
+          <entry key="JSON" value="13" />
+          <entry key="JavaScript" value="15" />
+          <entry key="Markdown" value="1" />
+          <entry key="PLAIN_TEXT" value="5" />
+          <entry key="Python" value="37" />
           <entry key="SVG" value="1" />
           <entry key="Scratch" value="2" />
           <entry key="yarn.lock" value="2" />
@@ -130,80 +178,81 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blog/models.py">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="52" column="63" selection-start-line="52" selection-start-column="63" selection-end-line="52" selection-end-column="63" />
+            <state relative-caret-position="135">
+              <caret line="9" column="4" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blog/forms.py">
+        <entry file="file://$PROJECT_DIR$/static/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" selection-start-line="30" selection-end-line="30" />
+            <state relative-caret-position="204">
+              <caret line="12" column="32" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="32" />
               <folding>
-                <element signature="e#0#33#0" expanded="true" />
+                <element signature="e#1#26#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
+            <state relative-caret-position="15">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/App.css">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CUHiking/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="474">
-              <caret line="135" lean-forward="true" selection-start-line="135" selection-end-line="135" />
+            <state relative-caret-position="131">
+              <caret line="124" column="48" lean-forward="true" selection-start-line="124" selection-start-column="48" selection-end-line="124" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/App.js">
+        <entry file="file://$PROJECT_DIR$/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="285">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/index.js">
+        <entry file="file://$PROJECT_DIR$/webpack.config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="105">
+              <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>templa</find>
       <find>get_fn</find>
       <find>User</find>
+      <find>plugin</find>
+      <find>bundle</find>
+      <find>bundletrack</find>
+      <find>loader</find>
+      <find>rules</find>
       <find>BASE_DIR</find>
     </findStrings>
   </component>
@@ -217,7 +266,6 @@
         <option value="$PROJECT_DIR$/templates/registration/base.html" />
         <option value="$PROJECT_DIR$/blog/templates/blog/hike_detail.html" />
         <option value="$PROJECT_DIR$/accounts/templates/signup.html" />
-        <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/CUHiking/urls.py" />
         <option value="$PROJECT_DIR$/templates/registration/logged_out.html" />
         <option value="$PROJECT_DIR$/accounts/urls.py" />
@@ -241,9 +289,19 @@
         <option value="$PROJECT_DIR$/blog/templates/blog/hike_list.html" />
         <option value="$PROJECT_DIR$/blog/views.py" />
         <option value="$PROJECT_DIR$/blog/models.py" />
+        <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/blog/forms.py" />
+        <option value="$PROJECT_DIR$/config/webpack.config.dev.js" />
+        <option value="$PROJECT_DIR$/config/webpack.config.prod.js" />
+        <option value="$PROJECT_DIR$/frontend/package.json" />
+        <option value="$PROJECT_DIR$/assets/js/index.js" />
+        <option value="$PROJECT_DIR$/.babelrc" />
+        <option value="$PROJECT_DIR$/static/js/index.js" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/CUHiking/settings.py" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
       </list>
     </option>
   </component>
@@ -284,7 +342,7 @@
             <path>
               <item name="CUHiking" type="b2602c69:ProjectViewProjectNode" />
               <item name="CUHiking" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="CUHiking" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CUHiking" type="b2602c69:ProjectViewProjectNode" />
@@ -294,7 +352,22 @@
             <path>
               <item name="CUHiking" type="b2602c69:ProjectViewProjectNode" />
               <item name="CUHiking" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CUHiking" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CUHiking" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="bundles" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CUHiking" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CUHiking" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CUHiking" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -309,10 +382,13 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/backend" />
       <recent name="$PROJECT_DIR$/blog/templates/blog" />
       <recent name="$PROJECT_DIR$/accounts/templates/accounts" />
       <recent name="$PROJECT_DIR$/templates" />
@@ -379,6 +455,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="625" y="22" width="1295" height="1110" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49941656" visible="true" weight="0.21628092" />
       <window_info id="Structure" order="1" sideWeight="0.5005834" side_tool="true" weight="0.15691869" />
@@ -393,8 +470,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.32866243" />
-      <window_info anchor="bottom" id="manage.py@CUHiking" order="10" sideWeight="0.49941793" weight="0.22789784" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.3280943" />
+      <window_info active="true" anchor="bottom" id="manage.py@CUHiking" order="10" sideWeight="0.49941793" visible="true" weight="0.22789784" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3280943" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5005821" side_tool="true" weight="0.25732484" />
       <window_info anchor="bottom" id="Python Console" order="13" sideWeight="0.49941793" weight="0.32866243" />
       <window_info anchor="bottom" id="Database Console" order="14" weight="0.3299363" />
@@ -404,30 +481,6 @@
       <window_info anchor="right" id="SciView" order="3" weight="0.32960412" />
       <window_info anchor="right" id="Database" order="4" weight="0.27853152" />
     </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2614679" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32907662" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3299363" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="9" weight="0.32866243" />
-      <window_info anchor="bottom" id="manage.py@CUHiking" order="10" visible="true" weight="0.25732484" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32866243" />
-      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="13" weight="0.32907662" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.32960412" />
-      <window_info anchor="right" id="Database" order="4" weight="0.23407917" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -436,87 +489,7 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/anaconda3/envs/CUHiking/lib/python3.6/site-packages/django/views/generic/detail.py" />
-    <entry file="file://$PROJECT_DIR$/templates/registration/base.html" />
-    <entry file="file://$PROJECT_DIR$/blog/templates/blog/hike_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="12" selection-start-column="12" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CUHiking/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/django_registration/registration_form.html" />
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/registration/password_reset_email.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/registration/password_reset_confirm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="16" selection-start-column="16" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.miniconda3/envs/CUHiking/lib/python3.6/site-packages/django/utils/six.py" />
-    <entry file="file://$PROJECT_DIR$/accounts/tokens.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/registration/password_reset_done.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="16" selection-start-column="16" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/registration/password_reset_complete.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/registration/password_reset_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/accounts/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
-          <folding>
-            <element signature="e#19#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/accounts/templates/accounts/signup.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="24" lean-forward="true" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CUHiking/urls.py">
+    <entry file="file://$PROJECT_DIR$/backend/CUHiking/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" selection-start-line="10" selection-end-line="10" />
@@ -526,7 +499,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/registration/logged_out.html">
+    <entry file="file://$PROJECT_DIR$/backend/templates/registration/logged_out.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
@@ -584,25 +557,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog/tests.py">
+    <entry file="file://$PROJECT_DIR$/backend/blog/tests.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/passwords.json" />
-    <entry file="file://$PROJECT_DIR$/blog/admin.py">
+    <entry file="file://$PROJECT_DIR$/backend/passwords.json" />
+    <entry file="file://$PROJECT_DIR$/backend/blog/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/registration/login.html">
+    <entry file="file://$PROJECT_DIR$/backend/templates/registration/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" selection-start-line="9" selection-end-line="14" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/registration/register.html">
+    <entry file="file://$PROJECT_DIR$/backend/templates/registration/register.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="20" column="11" lean-forward="true" selection-start-line="7" selection-start-column="4" selection-end-line="20" selection-end-column="14" />
@@ -612,7 +588,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/accounts/forms.py">
+    <entry file="file://$PROJECT_DIR$/backend/accounts/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="13" column="37" lean-forward="true" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
@@ -622,28 +598,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/accounts/views.py">
+    <entry file="file://$PROJECT_DIR$/backend/accounts/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="27" selection-start-line="27" selection-end-line="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog/templates/blog/hike_list.html">
+    <entry file="file://$PROJECT_DIR$/backend/blog/templates/blog/hike_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="28" column="14" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog/templates/blog/hike_register.html">
+    <entry file="file://$PROJECT_DIR$/backend/blog/templates/blog/hike_register.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="333">
           <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog/urls.py">
+    <entry file="file://$PROJECT_DIR$/backend/blog/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="66" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="66" />
@@ -653,7 +629,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog/views.py">
+    <entry file="file://$PROJECT_DIR$/backend/blog/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
@@ -663,7 +639,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog/models.py">
+    <entry file="file://$PROJECT_DIR$/backend/blog/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="367">
           <caret line="52" column="63" selection-start-line="52" selection-start-column="63" selection-end-line="52" selection-end-column="63" />
@@ -673,25 +649,12 @@
     <entry file="file://$PROJECT_DIR$/package-lock.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/yarn.lock">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.css">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/serviceWorker.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -721,40 +684,154 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build/index.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/CUHiking/settings.py">
+    <entry file="file://$PROJECT_DIR$/src/App.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="135" lean-forward="true" selection-start-line="135" selection-end-line="135" />
+        <state relative-caret-position="30">
+          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+          <folding>
+            <element signature="e#2#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/blog/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/webpackDevServer.config.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/webpack.config.prod.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="436" column="38" selection-start-line="436" selection-start-column="38" selection-end-line="436" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/webpack.config.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="175" column="13" selection-start-line="175" selection-start-column="8" selection-end-line="175" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/CUHiking/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="142" column="11" selection-start-line="142" selection-start-column="11" selection-end-line="142" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="53" selection-start-line="16" selection-start-column="53" selection-end-line="16" selection-end-column="53" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
+    <entry file="file://$PROJECT_DIR$/.babelrc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        <state relative-caret-position="75">
+          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="4" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack-stats.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="106" selection-start-column="106" selection-end-column="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CUHiking/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="124" column="48" lean-forward="true" selection-start-line="124" selection-start-column="48" selection-end-line="124" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="25" lean-forward="true" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="32" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="32" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#1#26#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
     </entry>
