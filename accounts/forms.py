@@ -9,3 +9,14 @@ class SignupForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
+
+#
+# class LeaderSignUpForm(forms.Form):
+#     place = forms.CharField(
+#         label='Destination',
+#         required=True,
+#         max_length=100,
+#         help_text='The name of the hiking destination you would like to lead.'
+#     )
+#     date = forms.DateField()
+

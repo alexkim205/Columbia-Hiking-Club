@@ -4,6 +4,6 @@ from .models import *
 
 # Register your models here.
 
-my_models = [Leader, Hike]
+my_models = [Hike, HikeRequest]
 
 admin.site.register(my_models)

@@ -23,5 +23,5 @@ class Signup(View):
         return render(request, self.template_name, {'form': form})
 
     def get(self, request, *args, **kwargs):
-        form = SignupForm(initial=self.initial)
+        form = self.form_class(initial=self.initial)
         return render(request, self.template_name, {'form': form})

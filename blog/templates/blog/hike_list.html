@@ -7,8 +7,14 @@
 {% block content %}
 
     {% if user.is_authenticated %}
-        Welcome {{ user.username }}!
-        Click <a href="{% url 'logout' %}">here</a> to log out.
+        <p>
+            Welcome {{ user.username }}!
+            Click <a href="{% url 'logout' %}">here</a> to log out.
+        </p>
+        <p>
+            Want to request/lead a hike? Fill out a short application <a href="{% url 'hike_request' %}">here</a>.
+        </p>
+
     {% else %}
         You are not logged in.
         Click <a href="{% url 'login' %}">here</a> to log in.

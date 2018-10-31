@@ -1,26 +1,33 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
+# class Leader(models.Model):
+#     first_name = models.CharField(max_length=30)
+#     last_name = models.CharField(max_length=30)
+#     email = models.EmailField()
+#     on_board = models.BooleanField(default=False)
+#
+#     def __str__(self):
+#         return "{} {}".format(self.first_name, self.last_name)
+#
+#     def get_fn(self):
+#         return "{}".format(self.first_name)
+#
+#     class Meta:
+#         ordering = ('-on_board', 'last_name',)
 
-class Leader(models.Model):
-
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    email = models.EmailField()
+class Leader(User):
     on_board = models.BooleanField(default=False)
 
     def __str__(self):
         return "{} {}".format(self.first_name, self.last_name)
 
     def get_fn(self):
-        return "{}".format(self.first_name)
-
-    class Meta:
-        ordering = ('-on_board','last_name',)
+            return "{}".format(self.first_name)
 
 
 class Hike(models.Model):
-
     EASY = 'EASY'
     INTM = 'INTERMEDIATE'
     HARD = 'HARD'
@@ -60,10 +67,17 @@ class Hike(models.Model):
                  [" and ".join(map(lambda x: x.get_fn(), self.hike_leaders.all()[count_neg2:]))]
         return concat.join(oxford)
 
-
-
     def hike_finished(self):
         return timezone.now() > self.date_of_hike
 
     class Meta:
         ordering = ('date_of_hike',)
+
+
+class HikeRequest(Hike):
+
+    user_who_requested = models.ForeignKey(Leader, on_delete=models.CASCADE)
+
+    def __str__(self):
+        leader_dest = "{}'s Hike Request to {}"
+        return leader_dest.format(self.get_hl(), self.destination)

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Sign up to lead a hike!
+    You must pay CU Hiking Club semester dues to be eligible to lead and attend hikes.
+    We can't guarantee all hike requests will be approved, but all submissions are welcome!
+{% endblock title %}
+
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        <p>
+            {{ form.date_of_hike.label_tag }}
+            {{ form.date_of_hike }}
+        </p>
+        <p>
+            {{ form.travel.label_tag }}
+            {{ form.travel }}
+        </p>
+        <p>
+            {{ form.destination.label_tag }}
+            {{ form.destination }}
+        </p>
+        <p>
+            {{ form.description.label_tag }}
+            {{ form.description }}
+        </p>
+        </p>
+        <p>
+            {{ form.difficulty.label_tag }}
+            {{ form.difficulty }}
+        </p>
+
+        <ul>
+            {% for error in field.errors %}
+                <li style="color: red">{{ error }}</li>
+            {% endfor %}
+        </ul>
+
+
+        <div>
+            <input type="submit"/>
+            <input type="hidden" name="next" value="{{ next }}"/>
+        </div>
+    </form>
+
+{% endblock %}
+

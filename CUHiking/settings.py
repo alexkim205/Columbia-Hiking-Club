@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = 'poh$si&%m0y4&dwd)dz1#m-y=mphi3%u&!8$3_pc1fwg&rjreo'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -41,6 +39,8 @@ INSTALLED_APPS = [
 
     # 3rd Party
     # 'django_registration',
+    # 'pipeline',
+    'rest_framework',
 
     # My Apps
     'blog.apps.BlogConfig',
@@ -62,7 +62,10 @@ ROOT_URLCONF = 'CUHiking.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [
+            # os.path.join(BASE_DIR, 'templates')
+            os.path.join(BASE_DIR, 'build')
+        ]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -78,7 +81,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'CUHiking.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -88,7 +90,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -108,7 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -122,11 +122,15 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+# http://gregblogs.com/how-django-reactjs-and-browserify/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/static/'
+STATICFILES_DIRS = [
+  os.path.join(BASE_DIR, 'build/static'),
+]
 
 # User Login/Logout
 
@@ -136,8 +140,12 @@ EMAIL_USE_TLS = True
 
 # Email Backend
 # https://medium.com/@frfahim/django-registration-with-confirmation-email-bb5da011e4ef
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'cuhiking@gmail.com'
-EMAIL_HOST_PASSWORD = 'golions'
-EMAIL_PORT = 587
+import json
+
+PASSWORD_FILE = 'passwords.json'
+PWD = json.load(open(PASSWORD_FILE))
+EMAIL_HOST = PWD['CLUB_EMAIL']['HOST']
+EMAIL_HOST_USER = PWD['CLUB_EMAIL']['ADDRESS']
+EMAIL_HOST_PASSWORD = PWD['CLUB_EMAIL']['PASSWORD']
+EMAIL_PORT = PWD['CLUB_EMAIL']['PORT']
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
