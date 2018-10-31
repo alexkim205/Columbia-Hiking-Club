@@ -4,20 +4,23 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.js --progress --colors --mode development",
-    "watch": "webpack --config webpack.config.js --watch --mode development"
+    "start:prod": "npm run build; python manage.py runserver",
+    "build": "webpack --config webpack.config.js --progress --colors --mode production",
+    "watch": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/preset-react": "^7.0.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "react-hot-loader": "^4.3.11",
     "webpack": "^4.23.1",
     "webpack-bundle-tracker": "^0.4.2-beta",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
     "react": "^16.6.0",

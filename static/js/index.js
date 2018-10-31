@@ -1,14 +1,10 @@
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 
 
-function Welcome(props) {
-  return <h1>Hello, {props.name}</h1>;
-}
+import App from './containers/App'
 
-const element = <Welcome name="world" />;
-ReactDOM.render(
-  element,
-  document.getElementById('react')
-);
+ReactDOM.render(<App />, document.getElementById('react'))
+
+
+module.hot.accept();

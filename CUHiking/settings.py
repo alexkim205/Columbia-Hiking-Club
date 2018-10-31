@@ -123,7 +123,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-# http://gregblogs.com/how-django-reactjs-and-browserify/
+# https://medium.com/uva-mobile-devhub/set-up-react-in-your-django-project-with-webpack-4fe1f8455396
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'

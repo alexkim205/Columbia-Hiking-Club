@@ -11,8 +11,13 @@
 <div id="root">
     This is where React will be mounted
 </div>
- <div id="react"></div>
- {% render_bundle 'main' %}
+<div id="react"></div>
+<script>
+    //{#window.props.first_name = {{ props }};#}
+    window.react_mount = document.getElementById('react');
+</script>
+
+{% render_bundle 'main' %}
 {% block content %}
 
 {% endblock content %}
