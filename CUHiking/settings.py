@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # 'pipeline',
     'webpack_loader',
     'rest_framework',
+    'django_extensions',
 
     # My Apps
     'blog.apps.BlogConfig',

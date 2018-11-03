@@ -27,3 +27,10 @@
         {% endfor %}
     </ul>
 {% endblock %}
+
+
+{# Load React Script #}
+{% block extrascripts %}
+    {% load render_bundle from webpack_loader %}
+    {% render_bundle 'blog/hike_list' %}
+{% endblock %}

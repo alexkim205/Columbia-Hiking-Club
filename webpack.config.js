@@ -1,6 +1,9 @@
 const path = require("path");
 const webpack = require('webpack');
 const BundleTracker = require('webpack-bundle-tracker');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 var mode = process.env.NODE_ENV || 'development';
 
@@ -9,13 +12,50 @@ var hotreloadJS = [
     'webpack/hot/only-dev-server'
 ]
 
+var JSFiles = [
+    // Hike Blog
+    'blog/hike_detail',
+    'blog/hike_list',
+    'blog/hike_register',
+
+    // Accounts
+    'accounts/login',
+    'accounts/logged_out',
+    // 'accounts/password_change',
+    // 'accounts/password_change_done',
+    'accounts/password_reset_form',
+    'accounts/password_reset_done',
+    'accounts/password_reset_confirm',
+    'accounts/password_reset_complete',
+    // 'accounts/password_reset_email',
+]
+
+
+function build_entries(listOfJS) {
+    let entries = {}
+    let hotter = ('production' === process.env.NODE_ENV ? [] : hotreloadJS)
+    const STATIC_CONTEXT = path.resolve('./static/js')
+
+    listOfJS.forEach(url => {
+        entries[url] = [...hotter, path.resolve(STATIC_CONTEXT, url)]
+    })
+    return entries
+}
+
+function isExternal(module) {
+    var context = module.context;
+
+    if (typeof context !== 'string') {
+        return false;
+    }
+
+    return context.indexOf('node_modules') !== -1;
+}
+
 var jsconfig = {
     context: __dirname,
 
-    entry: {
-        index: [...hotreloadJS, './static/js/index'],
-        hike_list: [...hotreloadJS, './static/js/hike_list'],
-    },
+    entry: build_entries(JSFiles),
 
     output: {
         path: path.resolve('./static/bundles'),
@@ -27,6 +67,33 @@ var jsconfig = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(), // don't reload if there is an error
         new BundleTracker({filename: './webpack-stats.json'}),
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        new UglifyJsPlugin({
+            uglifyOptions: {
+                mangle: true,
+                parallel: true,
+                unused: true,
+                dead_code: true, // big one--strip code that will never execute
+                warnings: false, // good for prod apps so users can't peek behind curtain
+                drop_debugger: true,
+                conditionals: true,
+                evaluate: true,
+                drop_console: true, // strips console statements
+                sequences: true,
+                booleans: true,
+                ie8: false,
+                compress: {
+                    warnings: false, // Suppress uglification warnings
+                    pure_getters: true,
+                    unsafe: true,
+                    unsafe_comps: true,
+                },
+                output: {
+                    comments: false,
+                },
+            }
+
+        }),
     ],
     module: {
         rules: [
@@ -45,17 +112,12 @@ var jsconfig = {
     optimization: {
         splitChunks: {
             cacheGroups: {
-                default: false,
-                vendors: false,
-
                 // vendor chunk
                 vendor: {
-                    // name of the chunk
                     name: 'vendor',
-                    // async + async chunks
                     chunks: 'initial',
-                    // import file path containing node_modules
                     test: /node_modules/,
+                    priority: 10,
                     enforce: true
                 },
 
@@ -69,7 +131,8 @@ var jsconfig = {
                     enforce: true
                 }
             }
-        }
+        },
+
     },
 
     resolve: {

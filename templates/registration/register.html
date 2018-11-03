@@ -29,3 +29,9 @@
     <p><a href="{% url 'login' %}">Already have an account? Log in here</a></p>
 
 {% endblock %}
+
+{# Load React Script #}
+{% block extrascripts %}
+    {% load render_bundle from webpack_loader %}
+    {% render_bundle 'accounts/register' %}
+{% endblock %}

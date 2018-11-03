@@ -41,3 +41,9 @@
     <p><a href="{% url 'signup' %}">First time here? Register here.</a></p>
 
 {% endblock %}
+
+{# Load React Script #}
+{% block extrascripts %}
+    {% load render_bundle from webpack_loader %}
+    {% render_bundle 'accounts/login' %}
+{% endblock %}
