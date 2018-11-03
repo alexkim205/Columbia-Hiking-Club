@@ -17,18 +17,21 @@
 
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
+        {% for field in form %}
+            <p>
+                {{ field.label_tag }}
+                {{ field }}
+            <ul>
+                {% for error in field.errors %}
+                    <li style="color: red">{{ error }}</li>
+                {% endfor %}
+            </ul>
+
+            </p>
+        {% endfor %}
 
         <div>
-            <td>{{ form.username.label_tag }}</td>
-            <td>{{ form.username }}</td>
-        </div>
-        <div>
-            <td>{{ form.password.label_tag }}</td>
-            <td>{{ form.password }}</td>
-        </div>
-
-        <div>
-            <input type="submit" value="login" />
+            <input type="submit"/>
             <input type="hidden" name="next" value="{{ next }}" />
         </div>
     </form>

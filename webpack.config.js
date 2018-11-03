@@ -1,17 +1,21 @@
-var path = require("path");
-var webpack = require('webpack');
-var BundleTracker = require('webpack-bundle-tracker');
+const path = require("path");
+const webpack = require('webpack');
+const BundleTracker = require('webpack-bundle-tracker');
 
 var mode = process.env.NODE_ENV || 'development';
 
-module.exports = {
+var hotreloadJS = [
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server'
+]
+
+var jsconfig = {
     context: __dirname,
 
-    entry: [
-        'webpack-dev-server/client?http://localhost:3000',
-        'webpack/hot/only-dev-server',
-        './static/js/index'
-    ],
+    entry: {
+        index: [...hotreloadJS, './static/js/index'],
+        hike_list: [...hotreloadJS, './static/js/hike_list'],
+    },
 
     output: {
         path: path.resolve('./static/bundles'),
@@ -30,17 +34,56 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: ['babel-loader']
+            },
+            {
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
             }
         ]
     },
+
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                default: false,
+                vendors: false,
+
+                // vendor chunk
+                vendor: {
+                    // name of the chunk
+                    name: 'vendor',
+                    // async + async chunks
+                    chunks: 'initial',
+                    // import file path containing node_modules
+                    test: /node_modules/,
+                    enforce: true
+                },
+
+                // common chunk
+                common: {
+                    name: 'common',
+                    minChunks: 2,
+                    chunks: 'all',
+                    priority: 10,
+                    reuseExistingChunk: true,
+                    enforce: true
+                }
+            }
+        }
+    },
+
     resolve: {
         extensions: ['*', '.js', '.jsx']
     },
     devServer: {
+        historyApiFallback: true,
         contentBase: './dist',
         hot: true
     },
     mode: mode,
-    devtool: (mode === 'development') ? 'inline-source-map' : false,
+    devtool: ('production' === process.env.NODE_ENV ? 'source-map' : 'cheap-module-eval-source-map'),
 
-};
+}
+
+
+module.exports = jsconfig

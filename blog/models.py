@@ -1,30 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
-
-# class Leader(models.Model):
-#     first_name = models.CharField(max_length=30)
-#     last_name = models.CharField(max_length=30)
-#     email = models.EmailField()
-#     on_board = models.BooleanField(default=False)
-#
-#     def __str__(self):
-#         return "{} {}".format(self.first_name, self.last_name)
-#
-#     def get_fn(self):
-#         return "{}".format(self.first_name)
-#
-#     class Meta:
-#         ordering = ('-on_board', 'last_name',)
-
-class Leader(User):
-    on_board = models.BooleanField(default=False)
-
-    def __str__(self):
-        return "{} {}".format(self.first_name, self.last_name)
-
-    def get_fn(self):
-            return "{}".format(self.first_name)
+from accounts.models import HikeUser
 
 
 class Hike(models.Model):
@@ -48,7 +24,7 @@ class Hike(models.Model):
         (NONE, 'None')
     )
 
-    hike_leaders = models.ManyToManyField(Leader)
+    hike_leaders = models.ManyToManyField(HikeUser)
     pub_date = models.DateTimeField('date published', auto_now_add=True)
     date_of_hike = models.DateTimeField('date and time of hike')
     travel = models.CharField(max_length=200, choices=TRAVEL_CHOICES, default=VAN)
@@ -76,7 +52,7 @@ class Hike(models.Model):
 
 class HikeRequest(Hike):
 
-    user_who_requested = models.ForeignKey(Leader, on_delete=models.CASCADE)
+    user_who_requested = models.ForeignKey(HikeUser, on_delete=models.CASCADE)
 
     def __str__(self):
         leader_dest = "{}'s Hike Request to {}"
