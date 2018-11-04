@@ -53,6 +53,17 @@ class HikeBase(models.Model):
 
 
 class Hike(HikeBase):
+
+    def save(self, *args, **kwargs):
+
+        super(Hike, self).save(*args, **kwargs)
+        if self.hike_leaders.count() > 0:
+            self.str_name = str(self)
+        else:
+            self.str_name = "Hike to {}".format(self.destination)
+
+        super(Hike, self).save(*args, **kwargs)
+
     pass
 
 

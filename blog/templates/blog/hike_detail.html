@@ -4,22 +4,6 @@
     Hike Details
 {% endblock title %}
 
-{% block content %}
-    {% if hike_detail.hike_finished %}
-        <div style="background-color: orangered; color: white; padding: 0.05em 0.5em">
-            <h3>Hike has finished. </h3>
-        </div>
-    {% endif %}
-
-    <h2>{{ hike_detail }}</h2>
-    <p><strong>Hike Leader(s): </strong>{{ hike_detail.get_hl }}</p>
-    <p><strong>Date and Time of Hike: </strong>{{ hike_detail.date_of_hike }}</p>
-    <p><strong>Destination: </strong>{{ hike_detail.destination }}</p>
-    <p><strong>Description: </strong>{{ hike_detail.description }}</p>
-    <p><strong>Difficulty: </strong>{{ hike_detail.difficulty }}</p>
-{% endblock %}
-
-
 {# Load React Script #}
 {% block extrascripts %}
     {% load render_bundle from webpack_loader %}
