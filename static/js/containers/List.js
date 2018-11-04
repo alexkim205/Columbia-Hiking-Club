@@ -15,8 +15,9 @@ class List extends Component {
 
     componentDidMount() {
         let today = new Date();
+        let all_hikes = this.props.data.reverse()
 
-        this.props.data.forEach(hike => {
+        all_hikes.forEach(hike => {
             if (new Date(hike.date_of_hike) <= today) {
                 this.setState(prevState => ({
                     past_hikes: [...prevState.past_hikes, hike]

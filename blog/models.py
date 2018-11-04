@@ -35,15 +35,12 @@ class HikeBase(models.Model):
     str_name = models.CharField(max_length=100, default="Hike", editable=False)
 
     def __str__(self):
-        leader_dest = "{}'s Hike to {}"
+        leader_dest = "{} Hike to {}"
         return leader_dest.format(self.get_hl(), self.destination)
 
     def get_hl(self):
-        count_neg2 = self.hike_leaders.count() - 2 if self.hike_leaders.count() >= 2 else 0
-        concat = ", " if self.hike_leaders.count() >= 2 else ""
-        oxford = [", ".join(map(lambda x: x.get_fn(), self.hike_leaders.all()[:count_neg2]))] + \
-                 [" and ".join(map(lambda x: x.get_fn(), self.hike_leaders.all()[count_neg2:]))]
-        return concat.join(oxford)
+        data = ["{}'s".format(leader.first_name) for leader in self.hike_leaders.all()]
+        return ", ".join(data[:-2] + [" and ".join(data[-2:])])
 
     def hike_finished(self):
         return timezone.now() > self.date_of_hike
