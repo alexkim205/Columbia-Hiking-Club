@@ -69,3 +69,8 @@ class HikeAPI(generics.RetrieveUpdateAPIView):
     lookup_field = 'pk'
     queryset = Hike.objects.all()
     serializer_class = HikeSerializer
+
+class HikeRequestAPI(generics.RetrieveUpdateAPIView):
+    lookup_field = 'pk'
+    queryset = HikeRequest.objects.all()
+    serializer_class = HikeRequestSerializer

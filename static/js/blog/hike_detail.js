@@ -8,14 +8,12 @@ import Detail from '../containers/Detail'
 function getPK(path_names)
 {
     let path_array = path_names.split('/')
-
     return path_array[path_array.length - 2]
 }
 
 const api_link = resolve(window.location.origin, "/api/hike/")
 const wrapper = document.getElementById('react')
 const pathname = window.location.pathname
-
 var api_pk = resolve(api_link, getPK(pathname))
 
 const App = () => {
