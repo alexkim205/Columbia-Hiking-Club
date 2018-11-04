@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     # 'pipeline',
     'webpack_loader',
     'rest_framework',
-    'django_extensions',
+    'django_js_reverse',
+    # 'django_extensions',
 
     # My Apps
     'blog.apps.BlogConfig',
@@ -129,11 +130,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 # https://medium.com/uva-mobile-devhub/set-up-react-in-your-django-project-with-webpack-4fe1f8455396
 
-STATIC_URL = '/static/'
-STATIC_ROOT = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+STATIC_URL = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+# ]
 
 # User Login/Logout
 
@@ -171,3 +172,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+
+# FIXTURE - https://docs.djangoproject.com/en/2.1/ref/django-admin/
+
+FIXTURE_DIRS = [
+    os.path.join(BASE_DIR, 'fixtures/')
+]

@@ -1,13 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import DataProvider from '../containers/DataProvider'
+import List from '../containers/List'
 
+const {resolve} = require('url');
+const api_link = resolve(window.location.origin, "/api/hikes/")
+console.log(api_link)
+const wrapper = document.getElementById('react')
 
-import App from '../containers/App'
+let hike_detail_link = 'hike_detail'
 
-ReactDOM.render(
-    <App />,
-    document.getElementById('react')
+const App = () => (
+    <DataProvider endpoint={api_link}
+                  render={data => <List url_base={hike_detail_link} data={data}/>}/>
 )
+
+wrapper ? ReactDOM.render(<App/>, wrapper) : null
 
 
 module.hot.accept();

@@ -1,9 +1,10 @@
 from django.db import models
 from django.utils import timezone
 from accounts.models import HikeUser
+from django.contrib.auth.models import Group
 
 
-class Hike(models.Model):
+class HikeBase(models.Model):
     EASY = 'EASY'
     INTM = 'INTERMEDIATE'
     HARD = 'HARD'
@@ -31,6 +32,7 @@ class Hike(models.Model):
     destination = models.CharField(max_length=200)
     description = models.TextField()
     difficulty = models.CharField(max_length=30, choices=DIFFICULTY_CHOICES, default=EASY)
+    str_name = models.CharField(max_length=100, default="Hike", editable=False)
 
     def __str__(self):
         leader_dest = "{}'s Hike to {}"
@@ -50,10 +52,36 @@ class Hike(models.Model):
         ordering = ('date_of_hike',)
 
 
-class HikeRequest(Hike):
+class Hike(HikeBase):
+    pass
 
-    user_who_requested = models.ForeignKey(HikeUser, on_delete=models.CASCADE)
+
+class HikeRequest(HikeBase):
+    user_who_requested = models.ForeignKey(HikeUser, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         leader_dest = "{}'s Hike Request to {}"
         return leader_dest.format(self.get_hl(), self.destination)
+
+    def save(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        will_lead = kwargs.pop('will_lead', None)
+
+        super(HikeRequest, self).save(*args, **kwargs)
+
+        # define user who requested
+        self.user_who_requested = user
+
+        # If user wants to lead hike
+        if will_lead:
+            # add user to hike leaders group
+            leaders_group = Group.objects.get(name='Hike Leaders')
+            leaders_group.user_set.add(user)
+
+            # add user to hike leaders
+            self.hike_leaders.add(user)
+            self.str_name = str(self)
+        else:
+            self.str_name = "Hike Request to {}".format(self.destination)
+
+        super(HikeRequest, self).save(*args, **kwargs)
