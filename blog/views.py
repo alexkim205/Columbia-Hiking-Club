@@ -4,7 +4,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect, get_object_or_404
-from rest_framework import generics
+
+from rest_framework import generics, status
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 from .serializers import *
 from .models import *
@@ -70,7 +73,17 @@ class HikeAPI(generics.RetrieveUpdateAPIView):
     queryset = Hike.objects.all()
     serializer_class = HikeSerializer
 
+
 class HikeRequestAPI(generics.RetrieveUpdateAPIView):
     lookup_field = 'pk'
     queryset = HikeRequest.objects.all()
     serializer_class = HikeRequestSerializer
+
+
+# class HikeRequestFormAPI(RegisterView):
+#     allowed_methods = ('GET', )
+#     serializer_class = HikeRequestSerializer
+#
+#     def get(self, *args, **kwargs):
+#         serializer = self.serializer_class()
+#         return Response({'serializer': serializer}, status=status.HTTP_200_OK)

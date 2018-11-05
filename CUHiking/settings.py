@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     # Default
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -41,8 +42,13 @@ INSTALLED_APPS = [
     # 'django_registration',
     # 'pipeline',
     'webpack_loader',
-    'rest_framework',
     'django_js_reverse',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    # 'rest_auth.registration',
+    # 'allauth',
+    # 'allauth.account',
     # 'django_extensions',
 
     # My Apps
@@ -113,6 +119,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'accounts.HikeUser'
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -169,10 +179,29 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
     ]
 }
 
+# REST AUTH - https://django-rest-auth.readthedocs.io/en/latest/configuration.html
+REST_AUTH_SERIALIZERS = {
+    "USER_DETAILS_SERIALIZER": "accounts.serializers.HikerSerializer",
+    "LOGIN_SERIALIZER": "accounts.serializers.HikerLoginFormSerializer"
+}
+REST_AUTH_REGISTER_SERIALIZERS = {
+    "REGISTER_SERIALIZER": "accounts.serializers.HikerRegisterFormSerializer",
+}
+SITE_ID = 1
+
+# REST AUTH ALL
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 # FIXTURE - https://docs.djangoproject.com/en/2.1/ref/django-admin/
 

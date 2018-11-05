@@ -5,12 +5,14 @@ from django.urls import reverse_lazy
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.models import Group
 
-from rest_framework import generics
-from rest_framework import authentication, permissions
+from rest_framework import generics, status, authentication, permissions, mixins
+from rest_framework import views as rest_views
+from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
 
 from .forms import SignupForm, LoginForm
 from .models import HikeUser
-from .serializers import HikerSerializer
+from .serializers import HikerSerializer, HikerRegisterFormSerializer
 
 
 class Signup(View):
@@ -48,25 +50,6 @@ class MyLoginView(auth_views.LoginView):
     success_url = reverse_lazy('hike_list')
     template_name = 'registration/login.html'
 
-    # def post(self, request, *args, **kwargs):
-    #     form = self.form_class(request.POST or None)
-    #     if form.is_valid():
-    #         print("VALID")
-    #         form.save()
-    #
-    #         email = form.cleaned_data.get('email')
-    #         raw_password = form.cleaned_data.get('password1')
-    #         user = authenticate(email=email, password=raw_password)
-    #         login(request, user)
-    #
-    #         return redirect('hike_list')
-    #     print("NOT VALID")
-    #     return render(request, self.template_name, {'form': form})
-    #
-    # def get(self, request, *args, **kwargs):
-    #     form = self.form_class(initial=self.initial)
-    #     return render(request, self.template_name, {'form': form})
-
 
 class HikersAPI(generics.ListAPIView):
     queryset = HikeUser.objects.all()
@@ -81,3 +64,21 @@ class HikerAPI(generics.RetrieveAPIView):
     serializer_class = HikerSerializer
     authentication_classes = (authentication.TokenAuthentication,)
     permission_classes = (permissions.IsAdminUser,)
+
+
+class HikerRegisterAPI(generics.CreateAPIView):
+    serializer_class = HikerRegisterFormSerializer
+    queryset = HikeUser.objects.all()
+
+    # allowed_methods = ('POST', 'OPTIONS')
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            if user:
+                token = Token.objects.create(user=user)
+                json = serializer.data
+                json['token'] = token.key
+                return Response(json, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -8,10 +8,18 @@ class Form extends Component {
 
     state = {
         // fields
-        formFields: []
+        formFields: [],
+        formAnswers: {}
+
     };
 
     componentDidMount() {
+
+        const context = {}
+
+        this.setState({
+            // formAnswers:
+        })
 
     }
 
