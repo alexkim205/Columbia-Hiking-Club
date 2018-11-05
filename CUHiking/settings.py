@@ -32,15 +32,12 @@ INSTALLED_APPS = [
     # Default
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
     # 3rd Party
-    # 'django_registration',
-    # 'pipeline',
     'webpack_loader',
     'django_js_reverse',
     'rest_framework',
@@ -50,6 +47,8 @@ INSTALLED_APPS = [
     # 'allauth',
     # 'allauth.account',
     # 'django_extensions',
+    # 'django_registration',
+    # 'pipeline',
 
     # My Apps
     'blog.apps.BlogConfig',

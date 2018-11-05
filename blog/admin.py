@@ -14,7 +14,8 @@ class HikeAdmin(admin.ModelAdmin):
 
 @admin.register(HikeRequest)
 class HikeRequestAdmin(admin.ModelAdmin):
-    fields = ['created_by', 'date_of_hike', 'travel', 'destination', 'description', 'difficulty', 'want_to_lead']
+    fields = HikeRequest.EXPOSED_FIELDS.append('pk')
+    readonly_fields = HikeRequest.READONLY_ADMIN_FIELDS
 
     def save_model(self, request, obj, form, change):
         if not obj.pk:

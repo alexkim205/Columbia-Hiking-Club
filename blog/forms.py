@@ -1,17 +1,16 @@
 from django.utils import timezone
 from django.utils.translation import gettext as _
-
-
 from django import forms
-from .models import *
+
+from .models import HikeRequest
 
 
 class HikeRequestForm(forms.ModelForm):
 
     class Meta:
         model = HikeRequest
-        fields = ('date_of_hike', 'travel', 'destination', 'description', 'difficulty', 'want_to_lead',)
-        exclude = ('created_by',)
+        fields = HikeRequest.EXPOSED_FIELDS
+        exclude = HikeRequest.READONLY_FIELDS
 
     def clean_date_of_hike(self):
         date = self.cleaned_data['date_of_hike']

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect, get_object_or_404
 
-from rest_framework import generics, status, mixins
+from rest_framework import generics, status, mixins, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 

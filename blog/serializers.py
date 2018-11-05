@@ -14,7 +14,9 @@ class HikeSerializer(serializers.ModelSerializer):
 class HikeRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = HikeRequest
-        fields = ('date_of_hike', 'travel', 'destination', 'description', 'difficulty', 'want_to_lead',)
+        fields = HikeRequest.EXPOSED_FIELDS
+        read_only_fields = HikeRequest.READONLY_FIELDS
         extra_kwargs = {
-            'created_by': {'required': False}
+            'created_by': {'required': False},
+            'hike_leaders': {'required': False}
         }

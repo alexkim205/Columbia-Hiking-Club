@@ -25,7 +25,7 @@ class HikeBase(models.Model):
         (NONE, 'None')
     )
 
-    hike_leaders = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    hike_leaders = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
     pub_date = models.DateTimeField('date published', auto_now_add=True)
     date_of_hike = models.DateTimeField('date and time of hike')
     travel = models.CharField(max_length=200, choices=TRAVEL_CHOICES, default=VAN)
@@ -51,7 +51,6 @@ class HikeBase(models.Model):
 
 
 class Hike(HikeBase):
-
     pass
 
 
@@ -59,6 +58,16 @@ class HikeRequest(HikeBase):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
     want_to_lead = models.BooleanField('I want to lead the hike', blank=True, null=True,
                                        help_text='If you check this box, you will be added to the hike leaders list.')
+
+    EXPOSED_FIELDS = [
+        'created_by', 'pub_date', 'date_of_hike', 'destination', 'description', 'difficulty',
+        'want_to_lead', 'hike_leaders', 'travel'
+    ]
+    READONLY_FIELDS = ('pk', 'hike_leaders', 'pub_date', 'travel', 'str_name', 'created_by')
+    READONLY_ADMIN_FIELDS = ('created_by', 'pub_date')
+
+    def __init__(self, *args, **kwargs):
+        super(self.__class__, self).__init__(*args, **kwargs)
 
     def __str__(self):
         leader_dest = "{} Hike Request to {}"
