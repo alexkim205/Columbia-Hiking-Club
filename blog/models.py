@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
-from accounts.models import HikeUser
 from django.contrib.auth.models import Group
+from django.conf import settings
 
 
 class HikeBase(models.Model):
@@ -25,7 +25,7 @@ class HikeBase(models.Model):
         (NONE, 'None')
     )
 
-    hike_leaders = models.ManyToManyField(HikeUser)
+    hike_leaders = models.ManyToManyField(settings.AUTH_USER_MODEL)
     pub_date = models.DateTimeField('date published', auto_now_add=True)
     date_of_hike = models.DateTimeField('date and time of hike')
     travel = models.CharField(max_length=200, choices=TRAVEL_CHOICES, default=VAN)
@@ -36,9 +36,10 @@ class HikeBase(models.Model):
 
     def __str__(self):
         leader_dest = "{} Hike to {}"
-        return leader_dest.format(self.get_hl(), self.destination)
+        return leader_dest.format(self.get_user(), self.destination)
 
-    def get_hl(self):
+    def get_user(self):
+        if self.hike_leaders.count() == 0: return ""
         data = ["{}'s".format(leader.first_name) for leader in self.hike_leaders.all()]
         return ", ".join(data[:-2] + [" and ".join(data[-2:])])
 
@@ -51,45 +52,39 @@ class HikeBase(models.Model):
 
 class Hike(HikeBase):
 
-    def save(self, *args, **kwargs):
-
-        super(Hike, self).save(*args, **kwargs)
-        if self.hike_leaders.count() > 0:
-            self.str_name = str(self)
-        else:
-            self.str_name = "Hike to {}".format(self.destination)
-
-        super(Hike, self).save(*args, **kwargs)
-
     pass
 
 
 class HikeRequest(HikeBase):
-    user_who_requested = models.ForeignKey(HikeUser, on_delete=models.CASCADE, blank=True, null=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
+    want_to_lead = models.BooleanField('I want to lead the hike', blank=True, null=True,
+                                       help_text='If you check this box, you will be added to the hike leaders list.')
 
     def __str__(self):
-        leader_dest = "{}'s Hike Request to {}"
-        return leader_dest.format(self.get_hl(), self.destination)
+        leader_dest = "{} Hike Request to {}"
+        return leader_dest.format(self.get_user(), self.destination)
+
+    def get_user(self):
+        if self.created_by is None: return ""
+        return "{}'s".format(self.created_by.first_name)
 
     def save(self, *args, **kwargs):
-        user = kwargs.pop('user', None)
-        will_lead = kwargs.pop('will_lead', None)
-
-        super(HikeRequest, self).save(*args, **kwargs)
+        # user = kwargs.pop('user', None)
+        # will_lead = kwargs.pop('will_lead', None)
 
         # define user who requested
-        self.user_who_requested = user
+        # self.user_who_requested = user
 
-        # If user wants to lead hike
-        if will_lead:
-            # add user to hike leaders group
-            leaders_group = Group.objects.get(name='Hike Leaders')
-            leaders_group.user_set.add(user)
-
-            # add user to hike leaders
-            self.hike_leaders.add(user)
-            self.str_name = str(self)
-        else:
-            self.str_name = "Hike Request to {}".format(self.destination)
+        # # If user wants to lead hike
+        # if will_lead:
+        #     # add user to hike leaders group
+        #     leaders_group = Group.objects.get(name='Hike Leaders')
+        #     leaders_group.user_set.add(user)
+        #
+        #     # add user to hike leaders
+        #     self.hike_leaders.add(user)
+        #     self.str_name = str(self)
+        # else:
+        #     self.str_name = "Hike Request to {}".format(self.destination)
 
         super(HikeRequest, self).save(*args, **kwargs)

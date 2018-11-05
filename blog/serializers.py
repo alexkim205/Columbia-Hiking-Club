@@ -14,4 +14,7 @@ class HikeSerializer(serializers.ModelSerializer):
 class HikeRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = HikeRequest
-        fields = '__all__'
+        fields = ('date_of_hike', 'travel', 'destination', 'description', 'difficulty', 'want_to_lead',)
+        extra_kwargs = {
+            'created_by': {'required': False}
+        }

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import *
+from .views import HikesListView, HikePostView, HikeRequestView
 
 urlpatterns = [
     path('', HikesListView.as_view(), name='hike_list'),

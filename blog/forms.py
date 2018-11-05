@@ -7,12 +7,11 @@ from .models import *
 
 
 class HikeRequestForm(forms.ModelForm):
-    want_to_lead = forms.BooleanField(label='I want to lead the hike', required=False, help_text='If you check this box, you will be added to the hike leaders list.')
 
     class Meta:
         model = HikeRequest
-        fields = ['date_of_hike', 'travel', 'destination', 'description', 'difficulty']
-        exclude = ('user_who_requested',)
+        fields = ('date_of_hike', 'travel', 'destination', 'description', 'difficulty', 'want_to_lead',)
+        exclude = ('created_by',)
 
     def clean_date_of_hike(self):
         date = self.cleaned_data['date_of_hike']
