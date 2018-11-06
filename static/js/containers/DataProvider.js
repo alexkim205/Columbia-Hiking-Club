@@ -13,14 +13,24 @@ class DataProvider extends Component {
         loaded: false,
         placeholder: "Loading..."
     };
+    componentWillMount() {
+        console.log("WILL MOUNT")
+    }
+    componentDidCatch() {
+        console.log("DID CATCH")
+    }
+    componentDidUpdate() {
+        console.log("DID UPDATE")
+    }
 
     componentDidMount() {
+        console.log("DID MOUNT")
         fetch(this.props.endpoint)
             .then(response => {
                 if (response.status !== 200) {
                     return this.setState({placeholder: "Something went wrong"});
                 }
-
+                console.log(response)
                 response.json().then(data => {
                     console.log(data);
                     this.setState({data: data, loaded: true});

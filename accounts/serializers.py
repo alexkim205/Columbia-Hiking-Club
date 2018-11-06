@@ -5,15 +5,17 @@ from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers, exceptions
 from rest_framework.authentication import authenticate
 
-from accounts.models import HikeUser
-
 UserModel = get_user_model()
 
 
 class HikerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = HikeUser
+        model = UserModel
         fields = '__all__'
+
+
+class CurrentActivitySerializer(HikerSerializer):
+    pass
 
 
 # Override RegisterSerializer

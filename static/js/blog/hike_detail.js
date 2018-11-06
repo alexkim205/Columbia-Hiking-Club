@@ -2,24 +2,26 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {resolve} from 'url';
 
+import BaseContainer from '../containers/BaseContainer'
 import DataProvider from '../containers/DataProvider'
 import Detail from '../containers/Detail'
 
-function getPK(path_names)
-{
+function getPK(path_names) {
     let path_array = path_names.split('/')
     return path_array[path_array.length - 2]
 }
 
-const api_link = resolve(window.location.origin, "/api/hike/")
 const wrapper = document.getElementById('react')
-const pathname = window.location.pathname
-var api_pk = resolve(api_link, getPK(pathname))
+const api_pk = Urls['hike_api'](getPK(window.location.pathname))
+
 
 const App = () => {
     return (
-        <DataProvider endpoint={api_pk}
-                      render={(data) => <Detail data={data} pathname={pathname}/>}/>
+        <BaseContainer>
+            <DataProvider endpoint={api_pk}
+                          render={(data) => <Detail data={data}/>}/>
+        </BaseContainer>
+
     )
 }
 

@@ -1,16 +1,28 @@
 import PropTypes from "prop-types";
 import React, {Component} from "react";
 
-class List extends Component {
+const ArrayBullets = (props) => (
+    <ul>
+        {props.array.map(row => (
+            <li key={row.id}>
+                <a href={props.link(row.id)}>
+                    {row.str_name}
+                </a>
+            </li>
+        ))}
+    </ul>
+);
+
+class HikeList extends Component {
     static propTypes = {
         data: PropTypes.array.isRequired,
-        url_base: PropTypes.string.isRequired,
+        elmnt_link: PropTypes.func.isRequired
         // render: PropTypes.func.isRequired
     };
 
     state = {
         upcoming_hikes: [],
-        past_hikes: [],
+        past_hikes: []
     };
 
     componentDidMount() {
@@ -32,7 +44,7 @@ class List extends Component {
 
     render() {
         const {upcoming_hikes, past_hikes} = this.state;
-        const {data, url_base} = this.props;
+        const {data, elmnt_link} = this.props;
 
         return !data.length ? (
             <p>No Hikes to show!</p>
@@ -41,30 +53,14 @@ class List extends Component {
                 <h2>
                     Upcoming hike(s)
                 </h2>
-                <ul>
-                    {upcoming_hikes.map(row => (
-                        <li key={row.id}>
-                            <a href={Urls[url_base](row.id)}>
-                                {row.str_name}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
+                <ArrayBullets array={upcoming_hikes} link={elmnt_link}/>
                 <h2>
                     Past hike(s)
                 </h2>
-                <ul>
-                    {past_hikes.map(row => (
-                        <li key={row.id}>
-                            <a href={Urls[url_base](row.id)}>
-                                {row.str_name}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
+                <ArrayBullets array={past_hikes} link={elmnt_link}/>
             </div>
         )
     }
 }
 
-export default List
+export default HikeList

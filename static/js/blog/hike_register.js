@@ -2,22 +2,24 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {resolve} from 'url';
 
-import Form from '../containers/Form'
+import HikeRequestForm from '../containers/HikeRequestForm'
+import BaseContainer from '../containers/BaseContainer'
 
-
-function getPK(path_names)
-{
-    let path_array = path_names.split('/')
+function getPK(path_names) {
+    let path_array = path_names.split('/');
     return path_array[path_array.length - 2]
 }
 
-const wrapper = document.getElementById('react')
-var api_pk = resolve(window.location.origin, "/api/hike-request/", getPK(window.location.pathname))
-
+const wrapper = document.getElementById('react');
+const request_form_api = Urls['hike_request_form_api']();
+const request_api = Urls['hike_request_api'](getPK(window.location.pathname))
 
 const App = () => {
     return (
-        <Form endpoint={api_pk}/>
+        <BaseContainer>
+            <HikeRequestForm endpoint={request_form_api}/>
+        </BaseContainer>
+
     )
 }
 wrapper ? ReactDOM.render(<App/>, wrapper) : null

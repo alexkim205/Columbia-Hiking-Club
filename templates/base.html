@@ -2,25 +2,28 @@
 <html>
 <head>
     <title>{% block title %}{% endblock title %}</title>
+    <!-- https://material-ui.com -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
 
 {# Login Information #}
 
-{% if user.is_authenticated %}
-    <p>
-        Welcome {{ user }}!
-        Click <a href="{% url 'logout' %}">here</a> to log out.
-    </p>
-    <p>
-        Want to request/lead a hike? Fill out a short application <a href="{% url 'hike_request' %}">here</a>.
-    </p>
-
-{% else %}
-    You are not logged in.
-    Click <a href="{% url 'login' %}">here</a> to log in.
-{% endif %}
+{#{% if user.is_authenticated %}#}
+{#    <p>#}
+{#        Welcome {{ user }}!#}
+{#        Click <a href="{% url 'logout' %}">here</a> to log out.#}
+{#    </p>#}
+{#    <p>#}
+{#        Want to request/lead a hike? Fill out a short application <a href="{% url 'hike_request' %}">here</a>.#}
+{#    </p>#}
+{##}
+{#{% else %}#}
+{#    You are not logged in.#}
+{#    Click <a href="{% url 'login' %}">here</a> to log in.#}
+{#{% endif %}#}
 
 {#####################}
 

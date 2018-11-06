@@ -8,13 +8,12 @@ import FieldRow from '../containers/FieldRow'
 class Detail extends Component {
     static propTypes = {
         data: PropTypes.object.isRequired,
-        pathname: PropTypes.string.isRequired,
         // render: PropTypes.func.isRequired
     };
 
     render() {
 
-        const {data, pathname} = this.props;
+        const {data} = this.props;
 
         let rows = [];
         let key_counter = 0

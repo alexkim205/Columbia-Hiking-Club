@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}
-    Hike Details
+    {{ title }}
 {% endblock title %}
 
 {# Load React Script #}
 {% block extrascripts %}
     {% load render_bundle from webpack_loader %}
-    {% render_bundle 'blog/hike_detail' %}
+    {% render_bundle reactfile %}
 {% endblock %}

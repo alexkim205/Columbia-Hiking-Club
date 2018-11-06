@@ -25,6 +25,13 @@ class HikeBase(models.Model):
         (NONE, 'None')
     )
 
+    EXPOSED_FIELDS = [
+        'id', 'pub_date', 'date_of_hike', 'destination', 'description', 'difficulty',
+        'hike_leaders', 'travel', 'str_name'
+    ]
+    READONLY_FIELDS = ['id', 'pk', 'hike_leaders', 'pub_date', 'travel', 'str_name']
+    READONLY_ADMIN_FIELDS = ['pub_date']
+
     hike_leaders = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
     pub_date = models.DateTimeField('date published', auto_now_add=True)
     date_of_hike = models.DateTimeField('date and time of hike')
@@ -46,6 +53,9 @@ class HikeBase(models.Model):
     def hike_finished(self):
         return timezone.now() > self.date_of_hike
 
+    def save(self, *args, **kwargs):
+        super(HikeBase, self).save(*args, **kwargs)
+
     class Meta:
         ordering = ('date_of_hike',)
 
@@ -59,12 +69,10 @@ class HikeRequest(HikeBase):
     want_to_lead = models.BooleanField('I want to lead the hike', blank=True, null=True,
                                        help_text='If you check this box, you will be added to the hike leaders list.')
 
-    EXPOSED_FIELDS = [
-        'created_by', 'pub_date', 'date_of_hike', 'destination', 'description', 'difficulty',
-        'want_to_lead', 'hike_leaders', 'travel'
-    ]
-    READONLY_FIELDS = ('pk', 'hike_leaders', 'pub_date', 'travel', 'str_name', 'created_by')
-    READONLY_ADMIN_FIELDS = ('created_by', 'pub_date')
+    new_fields = ['created_by', 'want_to_lead']
+    EXPOSED_FIELDS = HikeBase.EXPOSED_FIELDS + new_fields
+    READONLY_FIELDS = HikeBase.READONLY_FIELDS + [new_fields[0]]
+    READONLY_ADMIN_FIELDS = HikeBase.READONLY_ADMIN_FIELDS + [new_fields[0]]
 
     def __init__(self, *args, **kwargs):
         super(self.__class__, self).__init__(*args, **kwargs)
@@ -76,24 +84,3 @@ class HikeRequest(HikeBase):
     def get_user(self):
         if self.created_by is None: return ""
         return "{}'s".format(self.created_by.first_name)
-
-    def save(self, *args, **kwargs):
-        # user = kwargs.pop('user', None)
-        # will_lead = kwargs.pop('will_lead', None)
-
-        # define user who requested
-        # self.user_who_requested = user
-
-        # # If user wants to lead hike
-        # if will_lead:
-        #     # add user to hike leaders group
-        #     leaders_group = Group.objects.get(name='Hike Leaders')
-        #     leaders_group.user_set.add(user)
-        #
-        #     # add user to hike leaders
-        #     self.hike_leaders.add(user)
-        #     self.str_name = str(self)
-        # else:
-        #     self.str_name = "Hike Request to {}".format(self.destination)
-
-        super(HikeRequest, self).save(*args, **kwargs)

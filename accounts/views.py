@@ -4,6 +4,8 @@ from django.views import View
 from django.urls import reverse_lazy
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.models import Group
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from rest_framework import generics, status, authentication, permissions, mixins
 from rest_framework import views as rest_views
@@ -12,7 +14,7 @@ from rest_framework.authtoken.models import Token
 
 from .forms import SignupForm, LoginForm
 from .models import HikeUser
-from .serializers import HikerSerializer, HikerRegisterFormSerializer
+from .serializers import HikerSerializer, HikerRegisterFormSerializer, CurrentActivitySerializer
 
 
 class Signup(View):
@@ -44,11 +46,32 @@ class Signup(View):
         return render(request, self.template_name, {'form': form})
 
 
-class MyLoginView(auth_views.LoginView):
+@method_decorator(ensure_csrf_cookie, name='dispatch')
+class LoginView(auth_views.LoginView):
     form_class = LoginForm
     initial = {}
     success_url = reverse_lazy('hike_list')
     template_name = 'registration/login.html'
+
+
+# API Views
+
+class CurrentUserAPI(rest_views.APIView):
+    lookup_field = 'pk'
+    queryset = HikeUser.objects.all()
+    serializer_class = CurrentActivitySerializer
+    authentication_classes = (authentication.TokenAuthentication,)
+
+    def get(self, request):
+        user = request.user or None
+
+        if not user.is_authenticated or None:
+            return Response({
+                "status": 400,
+                "message": "You must log in to access the current user api."
+            }, status=status.HTTP_400_BAD_REQUEST)
+        serializer = self.serializer_class(user)
+        return Response(serializer.data)
 
 
 class HikersAPI(generics.ListAPIView):

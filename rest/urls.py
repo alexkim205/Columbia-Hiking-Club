@@ -1,6 +1,6 @@
 from django.urls import path, include
 from blog.views import HikesListAPI, HikeAPI, HikeRequestsListAPI, HikeRequestAPI, HikeRequestFormAPI
-from accounts.views import HikersAPI, HikerAPI, HikerRegisterAPI
+from accounts.views import HikersAPI, HikerAPI, HikerRegisterAPI, CurrentUserAPI
 from rest_auth.views import LoginView, LogoutView
 # from rest_auth.registration.views import RegisterView
 
@@ -15,6 +15,7 @@ urlpatterns = [
     # Accounts
     path('hikers/', HikersAPI.as_view(), name='hiker_list_api'),
     path('hiker/<int:pk>', HikerAPI.as_view(), name='hiker_api'),
+    path('hiker/me/', CurrentUserAPI.as_view(), name='current_user_api'),
 
     # REST Auth
     path('login/', LoginView.as_view(), name='auth_login'),

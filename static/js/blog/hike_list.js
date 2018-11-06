@@ -1,22 +1,33 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {resolve} from 'url';
+import {Route} from "react-router-dom";
 
+import BaseContainer from '../containers/BaseContainer'
 import DataProvider from '../containers/DataProvider'
-import List from '../containers/List'
+import HikeList from '../containers/HikeList'
+import LoginForm from "../containers/LoginForm";
 
 
-const api_link = resolve(window.location.origin, "/api/hikes/")
-const wrapper = document.getElementById('react')
+const wrapper = document.getElementById('react');
+const api_link = Urls['hike_list_api']();
+const hike_detail_url = Urls['hike_detail'];
+const hike_list_url = Urls['hike_list']();
 
-let hike_detail_link = 'hike_detail'
 
 const App = () => (
-    <DataProvider endpoint={api_link}
-                  render={data => <List data={data} url_base={hike_detail_link}/>}/>
-)
+    <BaseContainer>
+        <Route
+            path={hike_list_url}
+            render={(props) => <DataProvider endpoint={api_link}
+                                             render={data => <HikeList {...props} data={data}
+                                                                       elmnt_link={hike_detail_url}/>}/>}
+        />
 
-wrapper ? ReactDOM.render(<App/>, wrapper) : null
+    </BaseContainer>
+
+);
+
+wrapper ? ReactDOM.render(<App/>, wrapper) : null;
 
 
 module.hot.accept();
