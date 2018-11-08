@@ -7,9 +7,11 @@
     <title>Index</title>
 </head>
 <body>
-<div id="react">
+<div id="app">
 </div>
+<h1>Hello</h1>
 {% load render_bundle from webpack_loader %}
-{% render_bundle 'index' %}
+{% render_bundle 'bundle' %}
+{#{% render_bundle 'browser-sync/browser-sync-client' %}#}
 </body>
 </html>

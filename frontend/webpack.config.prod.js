@@ -4,6 +4,7 @@ import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
+import {backendPath, frontendPath} from './tools/exposePaths'
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production'),
@@ -15,11 +16,13 @@ export default {
     extensions: ['*', '.js', '.jsx', '.json']
   },
   devtool: 'source-map', // more info:https://webpack.js.org/guides/production/#source-mapping and https://webpack.js.org/configuration/devtool/
-  entry: path.resolve(__dirname, 'src/index'),
+  entry: {
+    index: path.resolve(frontendPath, 'src/index')
+  },
   target: 'web',
   mode: 'production',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(frontendPath, 'dist'),
     publicPath: '/',
     filename: '[name].[contenthash].js'
   },
@@ -144,7 +147,7 @@ export default {
           }, {
             loader: 'sass-loader',
             options: {
-              includePaths: [path.resolve(__dirname, 'src', 'scss')],
+              includePaths: [path.resolve(frontendPath, 'src', 'scss')],
               sourceMap: true
             }
           }

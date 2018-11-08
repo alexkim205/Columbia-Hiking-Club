@@ -14,6 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FRONTEND_DIR = os.path.join(os.path.abspath(os.path.join(BASE_DIR, os.pardir)), "frontend/")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -139,11 +140,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 # https://medium.com/uva-mobile-devhub/set-up-react-in-your-django-project-with-webpack-4fe1f8455396
 
-STATIC_URL = os.path.join(BASE_DIR, 'frontend/static/')
-STATIC_ROOT = os.path.join(BASE_DIR, 'frontend/static/')
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static"),
-# ]
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(FRONTEND_DIR, 'assets/')
+
+# WEBPACK
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': '/',
+        'STATS_FILE': os.path.join(FRONTEND_DIR, 'webpack-stats.json'),
+    }
+}
+
 
 # User Login/Logout
 
@@ -162,15 +169,6 @@ EMAIL_HOST_USER = PWD['CLUB_EMAIL']['ADDRESS']
 EMAIL_HOST_PASSWORD = PWD['CLUB_EMAIL']['PASSWORD']
 EMAIL_PORT = PWD['CLUB_EMAIL']['PORT']
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# WEBPACK
-
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'bundles/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
-    }
-}
 
 # DJANGO REST
 
