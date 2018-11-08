@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{# Load React Script #}
+{% block extrascripts %}
+    {% load render_bundle from webpack_loader %}
+    {% render_bundle reactfile %}
+{% endblock %}
