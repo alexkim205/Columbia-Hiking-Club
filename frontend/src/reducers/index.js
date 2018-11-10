@@ -1,8 +1,15 @@
-import { combineReducers } from 'redux';
-import fuelSavings from './fuelSavingsReducer';
+// Set up your root reducer here...
+import {combineReducers} from 'redux';
+import auth from "./auth"
+
 
 const rootReducer = combineReducers({
-  fuelSavings,
+  auth
 });
 
 export default rootReducer;
+
+
+// const hikingReducers = combineReducers({
+//
+// });

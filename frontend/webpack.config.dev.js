@@ -5,8 +5,10 @@ import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 import BundleTracker from 'webpack-bundle-tracker';
 import {
   backendPath,
-  frontendPath
+  frontendPath,
+  DEV_SERVER,
 } from './tools/exposePaths'
+
 
 export default {
   resolve: {
@@ -18,7 +20,7 @@ export default {
       // must be first entry to properly set public path
       './src/webpack-public-path',
       'react-hot-loader/patch',
-      'webpack-hot-middleware/client?reload=true',
+      `webpack-hot-middleware/client?path=${DEV_SERVER}__webpack_hmr&reload=true&__webpack_public_path=${DEV_SERVER}`,
       path.resolve(frontendPath, 'src/index.js'), // Defining path seems necessary for this to work consistently on Windows machines.
     ]
   },
@@ -26,7 +28,7 @@ export default {
   mode: 'development',
   output: {
     path: path.resolve(frontendPath, 'dist'), // Note: Physical files are only output by the production build task `npm run build`.
-    publicPath: 'http://localhost:3000/',
+    publicPath: DEV_SERVER,
     filename: '[name].[hash].js'
   },
   plugins: [

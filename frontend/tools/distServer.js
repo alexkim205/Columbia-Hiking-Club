@@ -4,6 +4,8 @@
 import browserSync from 'browser-sync';
 import historyApiFallback from 'connect-history-api-fallback';
 import {chalkProcessing} from './chalkConfig';
+import {BUILD_PORTS} from "./exposePaths";
+
 
 /* eslint-disable no-console */
 
@@ -11,9 +13,9 @@ console.log(chalkProcessing('Opening production build...'));
 
 // Run Browsersync
 browserSync({
-  port: 4000,
+  port: BUILD_PORTS.server,
   ui: {
-    port: 4001
+    port: BUILD_PORTS.ui
   },
   server: {
     baseDir: 'dist'

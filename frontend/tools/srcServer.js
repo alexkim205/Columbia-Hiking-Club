@@ -9,15 +9,20 @@ import historyApiFallback from 'connect-history-api-fallback';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import httpProxyMiddleware from 'http-proxy-middleware';
 import config from '../webpack.config.dev';
+import {
+  DEV_PORTS
+} from './exposePaths'
+
 
 const bundler = webpack(config);
 
 // Run Browsersync and use middleware for Hot Module Replacement
 browserSync({
-  port: 3000,
+  port: DEV_PORTS.server,
   ui: {
-    port: 3001
+    port: DEV_PORTS.ui
   },
   server: {
     baseDir: 'src',
@@ -31,7 +36,7 @@ browserSync({
 
         // These settings suppress noisy webpack output so only errors are displayed to the console.
         noInfo: true,
-        quiet: false,
+        quiet: true,
         stats: {
           assets: false,
           colors: true,
@@ -42,12 +47,21 @@ browserSync({
           chunkModules: false
         },
 
+
         // for other settings see
         // https://webpack.js.org/guides/development/#using-webpack-dev-middleware
       }),
 
       // bundler should be the same as above
-      webpackHotMiddleware(bundler)
+      webpackHotMiddleware(bundler),
+
+      // proxy to localhost:/django
+      httpProxyMiddleware('/', {
+        target: config.output.publicPath,
+        ws: true,
+        logLevel: 'error',
+        changeOrigin: true
+      })
     ]
   },
 
