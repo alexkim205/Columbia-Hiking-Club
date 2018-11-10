@@ -4,15 +4,16 @@ import {hot} from "react-hot-loader";
 import PropTypes from "prop-types";
 import {NavLink, Route, Switch, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
+import {compose} from "redux";
 
-// import {auth} from "../actions";
+import {auth} from "../actions";
 
 import PrivateRoute from "./PrivateRoute";
 import ProfilePage from "./ProfilePage";
 import LoginPage from "./LoginPage";
 import HikeListPage from "./HikeListPage";
 import NotFoundPage from "./NotFoundPage";
-import {compose} from "redux";
+
 // import withStyles from "@material-ui/core/styles/withStyles";
 
 

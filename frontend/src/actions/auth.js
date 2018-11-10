@@ -7,8 +7,6 @@ export const loadUser = () => {
     let headers = {
       "Content-type": "application/json"
     };
-
-    headers["Authorization"] = `Token 5991cce5b9af77999f31eb85a1347aff7d9321062e572a34ac9311aa0e3f2de6`
     if (token) {
       headers["Authorization"] = `Token ${token}`;
       // headers["Authorization"] = `Token 5991cce5b9af77999f31eb85a1347aff7d9321062e572a34ac9311aa0e3f2de6`
@@ -41,10 +39,10 @@ export const login = (email, password) => {
     let headers = {"Content-Type": "application/json"};
     let body = JSON.stringify({email, password});
 
-    return fetch("/api/auth/login", {headers, body, method: "POST"})
+    return fetch("/api/auth/login/", {headers, body, method: "POST"})
       .then(res => {
         if(res.status < 500) {
-          return res.join().then(data => {
+          return res.json().then(data => {
             return {status: res.status, data};
           })
         } else {
@@ -53,7 +51,7 @@ export const login = (email, password) => {
         }
       })
       .then(res => {
-        if (res.status === 200) {
+        if (res.status === 201) {
           dispatch({type: 'LOGIN_SUCCESSFUL', data: res.data });
           return res.data;
         } else if (res.status === 403 || res.status === 401) {
