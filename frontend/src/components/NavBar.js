@@ -13,8 +13,11 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AddCircleOutline from '@material-ui/icons/AddCircleOutline';
+import Add from '@material-ui/icons/Add';
 import ListIcon from '@material-ui/icons/List';
+import CardMembership from '@material-ui/icons/CardMembership';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import ContactSupport from '@material-ui/icons/ContactSupport';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuList from '@material-ui/core/MenuList';
@@ -24,14 +27,12 @@ import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import Popover from '@material-ui/core/Popover';
+import ListLinkItem from "./ListLinkItem";
 
 import {auth} from "../actions";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Divider from "@material-ui/core/Divider/Divider";
 import List from "@material-ui/core/List/List";
-import ListItem from "@material-ui/core/ListItem/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import Drawer from "@material-ui/core/Drawer/Drawer";
 
 
@@ -43,6 +44,9 @@ const styles = theme => ({
   },
   grow: {
     flexGrow: 1,
+  },
+  appBar: {
+
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -74,6 +78,8 @@ const styles = theme => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor: theme.palette.secondary.light,
+    color: theme.palette.secondary.contrastText
   },
   drawerHeader: {
     display: 'flex',
@@ -225,21 +231,11 @@ class NavBar extends Component {
           </div>
           <Divider/>
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                {/*<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>*/}
-                <ListItemText primary={text}/>
-              </ListItem>
-            ))}
-          </List>
-          <Divider/>
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem button key={text}>
-                {/*<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>*/}
-                <ListItemText primary={text}/>
-              </ListItem>
-            ))}
+            <ListLinkItem to={"/"} text={"Hikes"} icon={<ListIcon/>}/>
+            <ListLinkItem to={"/membership"} text={"Become a Member"} icon={<CardMembership/>}/>
+            <ListLinkItem to={"/hike-request"} text={"Request a Hike"} icon={<Add/>}/>
+            <Divider/>
+            <ListLinkItem to={"/contact"} text={"Contact Us"} icon={<ContactSupport/>}/>
           </List>
         </Drawer>
       </div>

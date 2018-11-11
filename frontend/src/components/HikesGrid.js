@@ -29,7 +29,7 @@ const styles = theme => ({
   tile: {
     // padding: theme.spacing.unit * 2,
     height: "100%",
-    margin: theme.spacing.unit * 1
+    margin: theme.spacing.unit * 2
   },
   cardactions: {
     align: "right"
