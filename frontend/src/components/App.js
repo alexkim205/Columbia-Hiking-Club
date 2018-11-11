@@ -5,43 +5,114 @@ import PropTypes from "prop-types";
 import {NavLink, Route, Switch, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {compose} from "redux";
+import classNames from 'classnames';
+
 
 import {auth} from "../actions";
 
+import NavBar from "./NavBar";
+// import Sidebar from "./Sidebar";
 import PrivateRoute from "./PrivateRoute";
 import ProfilePage from "./ProfilePage";
 import LoginPage from "./LoginPage";
-import HikeListPage from "./HikeListPage";
+import RegisterPage from "./RegisterPage";
+import HikesListPage from "./HikesListPage";
 import NotFoundPage from "./NotFoundPage";
 
-// import withStyles from "@material-ui/core/styles/withStyles";
+import withStyles from "@material-ui/core/styles/withStyles";
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue';
+import pink from '@material-ui/core/colors/pink';
+// import 'typeface-roboto';
 
+const theme = createMuiTheme({
+  // palette: {
+  //   primary: blue,
+  //   secondary: pink,
+  // }
+  palette: {
+    primary: {
+      light: '#555c7b',
+      main: '#2a334f',
+      dark: '#010c27',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#e07433',
+      main: '#a84600',
+      dark: '#731800',
+      contrastText: '#fff',
+    },
+  },
+});
 
+const drawerWidth = 240;
+
+const styles = theme => ({
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    // marginLeft: -drawerWidth,
+    // height: '100vh',
+    // overflow: 'auto',
+  },
+  appBarSpacer: theme.mixins.toolbar,
+
+});
 
 class App extends Component {
 
   componentDidMount() {
-    // this.props.loadUser();
+    this.props.loadUser();
   }
 
+  state = {
+    drawerOpen: false,
+  };
+
+  handleDrawerOpen = () => {
+    this.setState({drawerOpen: true});
+  };
+
+  handleDrawerClose = () => {
+    this.setState({drawerOpen: false});
+  };
+
   render() {
-    const activeStyle = {color: 'blue'};
+
+    const {classes} = this.props;
+    const {drawerOpen} = this.state;
 
     return (
       <div>
-        <div>
-          <NavLink exact to="/" activeStyle={activeStyle}>Hike List</NavLink>
-          {' | '}
-          <NavLink to="/login" activeStyle={activeStyle}>Demo App</NavLink>
-          {' | '}
-          <NavLink to="/profile" activeStyle={activeStyle}>Profile</NavLink>
-        </div>
-        <Switch>
-          <Route exact path="/" component={HikeListPage}/>
-          <Route path="/login" component={LoginPage}/>
-          <PrivateRoute path="/profile" component={ProfilePage}/>
-          <Route component={NotFoundPage}/>
-        </Switch>
+        <CssBaseline/>
+        <MuiThemeProvider theme={theme}>
+          <NavBar drawerOpen={this.state.drawerOpen}
+                  handleDrawerOpen={this.handleDrawerOpen}
+                  handleDrawerClose={this.handleDrawerClose}/>
+          {/*<Sidebar/>*/}
+          <div className={classes.appBarSpacer}/>
+          <main
+            className={classNames(classes.content, {
+              [classes.contentShift]: drawerOpen,
+            })}
+          >
+            <Switch>
+              <Route exact path="/" component={HikesListPage}/>
+              <PrivateRoute path="/profile" component={ProfilePage}/>
+              <Route path="/login" component={LoginPage}/>
+              <Route path="/register" component={RegisterPage}/>
+              <Route component={NotFoundPage}/>
+            </Switch>
+          </main>
+        </MuiThemeProvider>
+
       </div>
     );
   }
@@ -70,6 +141,7 @@ const mapDispatchToProps = dispatch => {
 
 export default compose(
   withRouter,
+  withStyles(styles),
   connect(mapStateToProps, mapDispatchToProps),
   hot(module),
 )(App);

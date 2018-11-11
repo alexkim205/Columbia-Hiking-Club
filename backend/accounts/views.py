@@ -127,6 +127,8 @@ class HikerLoginAPI(generics.GenericAPIView):
             "token": AuthToken.objects.create(request.user)
         }, status=status.HTTP_201_CREATED)
 
+# class HikerLogoutAPI(generics.GenericAPIView):
+
 # class HikerRegisterAPI(generics.CreateAPIView):
 #     serializer_class = HikerRegisterSerializer
 #     queryset = HikeUser.objects.all()

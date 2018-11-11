@@ -1,3 +1,4 @@
 import * as auth from "./auth";
+import * as hike from "./hike";
 
-export {auth}
+export {auth, hike}

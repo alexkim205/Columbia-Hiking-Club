@@ -26,7 +26,7 @@ const styles = theme => {
       padding: '30px',
     }
   }
-}
+};
 
 class LoginPage extends Component {
 

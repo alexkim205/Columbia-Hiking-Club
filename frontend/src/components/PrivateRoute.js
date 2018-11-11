@@ -58,4 +58,6 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+)(PrivateRoute);

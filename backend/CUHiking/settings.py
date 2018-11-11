@@ -191,7 +191,7 @@ REST_FRAMEWORK = {
 # REST AUTH - https://django-rest-auth.readthedocs.io/en/latest/configuration.html
 REST_AUTH_SERIALIZERS = {
     "USER_DETAILS_SERIALIZER": "accounts.serializers.HikerSerializer",
-    "LOGIN_SERIALIZER": "accounts.serializers.HikerLoginFormSerializer"
+    "LOGIN_SERIALIZER": "accounts.serializers.HikerLoginSerializer"
 }
 REST_AUTH_REGISTER_SERIALIZERS = {
     "REGISTER_SERIALIZER": "accounts.serializers.HikerRegisterFormSerializer",

@@ -8,7 +8,7 @@ from accounts.views import (
     HikerRegisterAPI, HikerLoginAPI,
 )
 
-# from rest_auth.views import LoginView, LogoutView
+from rest_auth.views import LoginView, LogoutView
 # from rest_auth.registration.views import RegisterView
 
 urlpatterns = [
@@ -27,6 +27,6 @@ urlpatterns = [
     # REST Auth
     path('auth-knox/', include('knox.urls')),
     path('auth/login/', HikerLoginAPI.as_view(), name='auth_login'),
-    # path('logout/', LogoutView.as_view(), name='auth_logout'),
+    path('auth/logout/', LogoutView.as_view(), name='auth_logout'),
     path('auth/register/', HikerRegisterAPI.as_view(), name='auth_register')
 ]
