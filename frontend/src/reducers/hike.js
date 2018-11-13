@@ -30,6 +30,22 @@ export default function hike(state = initialState, action) {
         received: false
       };
 
+    case 'REQUEST_SUCCESSFUL':
+      return {
+        ...state,
+        hikes: action.hikes,
+        isLoading: false,
+        received: true
+      };
+
+    case 'REQUEST_FAILED':
+      return {
+        ...state,
+        errors: action.data,
+        isLoading: false,
+        received: false
+      };
+
     default:
       return state;
   }

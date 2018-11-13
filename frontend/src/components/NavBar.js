@@ -14,7 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AddCircleOutline from '@material-ui/icons/AddCircleOutline';
 import Add from '@material-ui/icons/Add';
-import ListIcon from '@material-ui/icons/List';
+import Landscape from '@material-ui/icons/Landscape';
 import CardMembership from '@material-ui/icons/CardMembership';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ContactSupport from '@material-ui/icons/ContactSupport';
@@ -27,13 +27,16 @@ import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import Popover from '@material-ui/core/Popover';
-import ListLinkItem from "./ListLinkItem";
-
-import {auth} from "../actions";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Divider from "@material-ui/core/Divider/Divider";
 import List from "@material-ui/core/List/List";
 import Drawer from "@material-ui/core/Drawer/Drawer";
+import Avatar from '@material-ui/core/Avatar';
+
+
+import ListLinkItem from "./ListLinkItem";
+
+import {auth} from "../actions";
 
 
 const drawerWidth = 240;
@@ -45,9 +48,7 @@ const styles = theme => ({
   grow: {
     flexGrow: 1,
   },
-  appBar: {
-
-  },
+  appBar: {},
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
@@ -75,11 +76,13 @@ const styles = theme => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+    flex: 1,
+    flexDirection: 'row',
   },
   drawerPaper: {
     width: drawerWidth,
-    backgroundColor: theme.palette.secondary.light,
-    color: theme.palette.secondary.contrastText
+    // backgroundColor: theme.palette.secondary.light,
+    // color: theme.palette.secondary.contrastText
   },
   drawerHeader: {
     display: 'flex',
@@ -146,14 +149,6 @@ class NavBar extends Component {
               Columbia University Hiking Club
             </Typography>
             <div className={classes.grow}/>
-            {/*<IconButton*/}
-            {/*color="inherit"*/}
-            {/*component={Link}*/}
-            {/*to="/"*/}
-            {/*>*/}
-            {/*<ListIcon/>*/}
-            {/*</IconButton>*/}
-            {/*<Button component={Link} to="/" color="inherit">Hike List</Button>*/}
             {isAuthenticated ? (
               <React.Fragment>
                 <IconButton
@@ -215,29 +210,34 @@ class NavBar extends Component {
             )}
           </Toolbar>
         </AppBar>
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={drawerOpen}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon/>
-            </IconButton>
-          </div>
-          <Divider/>
-          <List>
-            <ListLinkItem to={"/"} text={"Hikes"} icon={<ListIcon/>}/>
-            <ListLinkItem to={"/membership"} text={"Become a Member"} icon={<CardMembership/>}/>
-            <ListLinkItem to={"/hike-request"} text={"Request a Hike"} icon={<Add/>}/>
-            <Divider/>
-            <ListLinkItem to={"/contact"} text={"Contact Us"} icon={<ContactSupport/>}/>
-          </List>
-        </Drawer>
+
+        {/* Side Drawer */}
+        <ClickAwayListener onClickAway={handleDrawerClose}>
+          <Drawer
+            className={classes.drawer}
+            variant="persistent"
+            anchor="left"
+            open={drawerOpen}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+          >
+
+            <div className={classes.drawerHeader}>
+              <IconButton onClick={handleDrawerClose}>
+                <ChevronLeftIcon/>
+              </IconButton>
+            </div>
+
+            <MenuList>
+              <ListLinkItem to={"/"} text={"Hikes"} icon={<Landscape/>}/>
+              <ListLinkItem to={"/membership"} text={"Become a Member"} icon={<CardMembership/>}/>
+              <ListLinkItem to={"/hike-req"} text={"Request a Hike"} icon={<Add/>}/>
+              <ListLinkItem to={"/contact"} text={"Contact Us"} icon={<ContactSupport/>}/>
+            </MenuList>
+          </Drawer>
+        </ClickAwayListener>
+
       </div>
     )
   }

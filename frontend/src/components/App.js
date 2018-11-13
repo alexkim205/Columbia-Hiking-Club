@@ -17,6 +17,7 @@ import ProfilePage from "./ProfilePage";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 import HikesListPage from "./HikesListPage";
+import HikeRequestPage from "./HikeRequestPage";
 import NotFoundPage from "./NotFoundPage";
 
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -25,6 +26,7 @@ import Typography from '@material-ui/core/Typography';
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 import pink from '@material-ui/core/colors/pink';
+
 // import 'typeface-roboto';
 
 const theme = createMuiTheme({
@@ -40,9 +42,9 @@ const theme = createMuiTheme({
       contrastText: '#fff',
     },
     secondary: {
-      light: '#e07433',
-      main: '#a84600',
-      dark: '#731800',
+      light: '#ff9f5b',
+      main: '#dd6f2e',
+      dark: '#a54100',
       contrastText: '#fff',
     },
   },
@@ -108,6 +110,7 @@ class App extends Component {
               <PrivateRoute path="/profile" component={ProfilePage}/>
               <Route path="/login" component={LoginPage}/>
               <Route path="/register" component={RegisterPage}/>
+              <Route path="/hike-req" component={HikeRequestPage}/>
               <Route component={NotFoundPage}/>
             </Switch>
           </main>
