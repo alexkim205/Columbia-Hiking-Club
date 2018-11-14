@@ -1,14 +1,14 @@
 // Set up your root reducer here...
-import { combineReducers } from 'redux'
-import auth from './auth'
-import hike from './hike'
+import { combineReducers } from 'redux';
+import auth                from './auth';
+import hike                from './hike';
 
 const rootReducer = combineReducers({
   auth,
-  hike
-})
+  hike,
+});
 
-export default rootReducer
+export default rootReducer;
 
 // const hikingReducers = combineReducers({
 //

@@ -1,21 +1,20 @@
-import React, {Component} from "react";
-import {Redirect, Link, withRouter} from "react-router-dom";
-import {compose} from "redux";
-import PropTypes from "prop-types";
-import withStyles from "@material-ui/core/styles/withStyles";
-import {hot} from "react-hot-loader";
+import React, { Component }           from 'react';
+import { Redirect, Link, withRouter } from 'react-router-dom';
+import { compose }                    from 'redux';
+import PropTypes                      from 'prop-types';
+import withStyles
+                                      from '@material-ui/core/styles/withStyles';
+import { hot }                        from 'react-hot-loader';
 
+import { XMasonry, XBlock } from 'react-xmasonry/dist/index.js'; // Imports precompiled bundle
 
-import {XMasonry, XBlock} from "react-xmasonry/dist/index.js"; // Imports precompiled bundle
-
-import CardActionArea from "@material-ui/core/CardActionArea/CardActionArea";
-import CardMedia from "@material-ui/core/CardMedia/CardMedia";
-import CardContent from "@material-ui/core/CardContent/CardContent";
-import Typography from "@material-ui/core/Typography/Typography";
-import CardActions from "@material-ui/core/CardActions/CardActions";
-import Button from "@material-ui/core/Button/Button";
-import Card from "@material-ui/core/Card/Card";
-
+import CardActionArea from '@material-ui/core/CardActionArea/CardActionArea';
+import CardMedia      from '@material-ui/core/CardMedia/CardMedia';
+import CardContent    from '@material-ui/core/CardContent/CardContent';
+import Typography     from '@material-ui/core/Typography/Typography';
+import CardActions    from '@material-ui/core/CardActions/CardActions';
+import Button         from '@material-ui/core/Button/Button';
+import Card           from '@material-ui/core/Card/Card';
 
 const styles = theme => ({
   media: {
@@ -24,16 +23,16 @@ const styles = theme => ({
   xblock: {
     animation: 'comeIn ease 0.5s',
     animationIterationCount: 1,
-    transition: 'left .3s ease, top .3s ease'
+    transition: 'left .3s ease, top .3s ease',
   },
   tile: {
     // padding: theme.spacing.unit * 2,
-    height: "100%",
-    margin: theme.spacing.unit * 2
+    height: '100%',
+    margin: theme.spacing.unit * 2,
   },
   cardactions: {
-    align: "right"
-  }
+    align: 'right',
+  },
 });
 
 class HikesGrid extends Component {
@@ -41,12 +40,12 @@ class HikesGrid extends Component {
   getLayout = () => {
     const {hikeData} = this.props;
     hikeData.forEach((e) => {
-      e['width'] = (Date.parse(e.date_of_hike) > new Date()) ? 2: 1
+      e['width'] = (Date.parse(e.date_of_hike) > new Date()) ? 2 : 1;
     });
-    return hikeData
+    return hikeData;
   };
 
-  render() {
+  render () {
 
     const {classes} = this.props;
     const hikeData = this.getLayout();
@@ -87,15 +86,14 @@ class HikesGrid extends Component {
             </XBlock>
           ))}
       </XMasonry>
-    )
+    );
   }
 }
 
 HikesGrid.propTypes = {
   classes: PropTypes.object,
-  hikeData: PropTypes.array.isRequired
+  hikeData: PropTypes.array.isRequired,
 };
-
 
 export default compose(
   withRouter,

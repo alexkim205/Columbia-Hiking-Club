@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import React                from 'react';
+import { Link, withRouter } from 'react-router-dom';
 
 const NotFoundPage = () => {
   return (
@@ -9,7 +9,7 @@ const NotFoundPage = () => {
       </h4>
       <Link to='/'> Go back to homepage </Link>
     </div>
-  )
-}
+  );
+};
 
-export default withRouter(NotFoundPage)
+export default withRouter(NotFoundPage);

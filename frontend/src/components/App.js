@@ -1,31 +1,33 @@
 /* eslint-disable import/no-named-as-default */
-import React, {Component} from "react";
-import {hot} from "react-hot-loader";
-import PropTypes from "prop-types";
-import {NavLink, Route, Switch, withRouter} from "react-router-dom";
-import {connect} from "react-redux";
-import {compose} from "redux";
-import classNames from 'classnames';
+import React, { Component }                   from 'react';
+import { hot }                                from 'react-hot-loader';
+import PropTypes                              from 'prop-types';
+import { NavLink, Route, Switch, withRouter } from 'react-router-dom';
+import { connect }                            from 'react-redux';
+import { compose }                            from 'redux';
+import classNames                             from 'classnames';
 
+import { auth } from '../actions';
 
-import {auth} from "../actions";
-
-import NavBar from "./NavBar";
+import NavBar          from './NavBar';
 // import Sidebar from "./Sidebar";
-import PrivateRoute from "./PrivateRoute";
-import ProfilePage from "./ProfilePage";
-import LoginPage from "./LoginPage";
-import RegisterPage from "./RegisterPage";
-import HikesListPage from "./HikesListPage";
-import HikeRequestPage from "./HikeRequestPage";
-import NotFoundPage from "./NotFoundPage";
+import PrivateRoute    from './PrivateRoute';
+import ProfilePage     from './ProfilePage';
+import LoginPage       from './LoginPage';
+import RegisterPage    from './RegisterPage';
+import HikesListPage   from './HikesListPage';
+import HikeRequestPage from './HikeRequestPage';
+import NotFoundPage    from './NotFoundPage';
 
-import withStyles from "@material-ui/core/styles/withStyles";
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
-import pink from '@material-ui/core/colors/pink';
+import withStyles                           from '@material-ui/core/styles/withStyles';
+import CssBaseline
+                                            from '@material-ui/core/CssBaseline';
+import Typography                           from '@material-ui/core/Typography';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import blue
+                                            from '@material-ui/core/colors/blue';
+import pink
+                                            from '@material-ui/core/colors/pink';
 
 // import 'typeface-roboto';
 
@@ -70,7 +72,7 @@ const styles = theme => ({
 
 class App extends Component {
 
-  componentDidMount() {
+  componentDidMount () {
     this.props.loadUser();
   }
 
@@ -86,7 +88,7 @@ class App extends Component {
     this.setState({drawerOpen: false});
   };
 
-  render() {
+  render () {
 
     const {classes} = this.props;
     const {drawerOpen} = this.state;
@@ -122,25 +124,24 @@ class App extends Component {
 }
 
 App.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.element,
 };
 
 const mapStateToProps = state => {
   return {
     auth: state.auth,
-  }
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     loadUser: () => {
-      return dispatch(auth.loadUser())
-    }
-  }
+      return dispatch(auth.loadUser());
+    },
+  };
 };
 
 // export default hot(module)(App);
-
 
 export default compose(
   withRouter,
@@ -148,6 +149,5 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   hot(module),
 )(App);
-
 
 // https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/redux.md

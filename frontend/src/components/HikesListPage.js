@@ -1,18 +1,16 @@
-import React, {Component} from "react";
-import {connect} from "react-redux";
-import {Redirect, Link, withRouter} from "react-router-dom";
-import {compose} from "redux";
-import PropTypes from 'prop-types';
-import {hot} from "react-hot-loader";
+import React, { Component }           from 'react';
+import { connect }                    from 'react-redux';
+import { Redirect, Link, withRouter } from 'react-router-dom';
+import { compose }                    from 'redux';
+import PropTypes                      from 'prop-types';
+import { hot }                        from 'react-hot-loader';
 
-
-import {hike} from "../actions";
+import { hike } from '../actions';
 
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import HikesGrid from "./HikesGrid"
-
+import HikesGrid from './HikesGrid';
 
 const styles = theme => {
   return {
@@ -34,21 +32,21 @@ const styles = theme => {
       overflow: 'visible',
     },
     titleSpacer: theme.mixins.toolbar,
-  }
+  };
 };
 
 class HikesListPage extends Component {
 
-  componentWillMount() {
-    this.setState({hikes: this.props.getHikes()})
+  componentWillMount () {
+    this.setState({hikes: this.props.getHikes()});
   }
 
   state = {
     isOpen: false,
-    hikes: null
+    hikes: null,
   };
 
-  render() {
+  render () {
 
     const {classes, hikeReceived, hikeData} = this.props;
     const {isOpen} = this.state;
@@ -69,7 +67,7 @@ class HikesListPage extends Component {
           )}
         </div>
       </React.Fragment>
-    )
+    );
   }
 }
 
@@ -82,25 +80,24 @@ const mapStateToProps = state => {
   if (state.hike.errors) {
     errors = Object.keys(state.hike.errors).map(field => {
       return {field, message: state.hike.errors[field]};
-    })
+    });
   }
 
   return {
     errors,
     hikeData: state.hike.hikes,
-    hikeReceived: state.hike.received
+    hikeReceived: state.hike.received,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getHikes: () => dispatch(hike.getHikes())
+    getHikes: () => dispatch(hike.getHikes()),
     // register: (fname, lname, email, password) => {
     //   return dispatch(auth.register(fname, lname, email, password))
     // }
-  }
-}
-
+  };
+};
 
 export default compose(
   withRouter,

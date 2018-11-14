@@ -1,43 +1,41 @@
-import {NavLink, withRouter, Link, Route} from "react-router-dom";
-import PropTypes from 'prop-types';
-import React, {Component} from "react";
-import classNames from 'classnames';
-import {compose} from "redux";
-import {connect} from "react-redux";
-import {hot} from "react-hot-loader";
+import { NavLink, withRouter, Link, Route } from 'react-router-dom';
+import PropTypes                            from 'prop-types';
+import React, { Component }                 from 'react';
+import classNames                           from 'classnames';
+import { compose }                          from 'redux';
+import { connect }                          from 'react-redux';
+import { hot }                              from 'react-hot-loader';
 
-import withStyles from "@material-ui/core/styles/withStyles";
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import AddCircleOutline from '@material-ui/icons/AddCircleOutline';
-import Add from '@material-ui/icons/Add';
-import Landscape from '@material-ui/icons/Landscape';
-import CardMembership from '@material-ui/icons/CardMembership';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import ContactSupport from '@material-ui/icons/ContactSupport';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import MenuList from '@material-ui/core/MenuList';
-import Button from '@material-ui/core/Button';
+import withStyles        from '@material-ui/core/styles/withStyles';
+import AppBar            from '@material-ui/core/AppBar';
+import Toolbar           from '@material-ui/core/Toolbar';
+import Typography        from '@material-ui/core/Typography';
+import IconButton        from '@material-ui/core/IconButton';
+import MenuIcon          from '@material-ui/icons/Menu';
+import AddCircleOutline  from '@material-ui/icons/AddCircleOutline';
+import Add               from '@material-ui/icons/Add';
+import Landscape         from '@material-ui/icons/Landscape';
+import CardMembership    from '@material-ui/icons/CardMembership';
+import AccountCircle     from '@material-ui/icons/AccountCircle';
+import ContactSupport    from '@material-ui/icons/ContactSupport';
+import MenuItem          from '@material-ui/core/MenuItem';
+import Menu              from '@material-ui/core/Menu';
+import MenuList          from '@material-ui/core/MenuList';
+import Button            from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import Popover from '@material-ui/core/Popover';
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import Divider from "@material-ui/core/Divider/Divider";
-import List from "@material-ui/core/List/List";
-import Drawer from "@material-ui/core/Drawer/Drawer";
-import Avatar from '@material-ui/core/Avatar';
+import Grow              from '@material-ui/core/Grow';
+import Paper             from '@material-ui/core/Paper';
+import Popper            from '@material-ui/core/Popper';
+import Popover           from '@material-ui/core/Popover';
+import ChevronLeftIcon   from '@material-ui/icons/ChevronLeft';
+import Divider           from '@material-ui/core/Divider/Divider';
+import List              from '@material-ui/core/List/List';
+import Drawer            from '@material-ui/core/Drawer/Drawer';
+import Avatar            from '@material-ui/core/Avatar';
 
+import ListLinkItem from './ListLinkItem';
 
-import ListLinkItem from "./ListLinkItem";
-
-import {auth} from "../actions";
-
+import { auth } from '../actions';
 
 const drawerWidth = 240;
 
@@ -100,7 +98,7 @@ class NavBar extends Component {
     profileOpen: false,
   };
 
-  componentDidMount() {
+  componentDidMount () {
     this.props.loadUser();
     this.setState({profileOpen: false});
   }
@@ -109,7 +107,7 @@ class NavBar extends Component {
     const {currentTarget} = event;
     this.setState(state => ({
       anchorEl: currentTarget,
-      profileOpen: !state.profileOpen
+      profileOpen: !state.profileOpen,
     }));
   };
 
@@ -120,11 +118,11 @@ class NavBar extends Component {
 
     this.setState({
       anchorEl: null,
-      profileOpen: false
+      profileOpen: false,
     });
   };
 
-  render() {
+  render () {
 
     const {classes, drawerOpen, handleDrawerClose, handleDrawerOpen} = this.props;
     const isAuthenticated = this.props.isAuthenticated;
@@ -138,14 +136,16 @@ class NavBar extends Component {
                 })}>
           <Toolbar>
             <IconButton
-              className={classNames(classes.menuButton, drawerOpen && classes.hide)}
+              className={classNames(classes.menuButton,
+                drawerOpen && classes.hide)}
               color="inherit"
               aria-label="Open drawer"
               onClick={handleDrawerOpen}
             >
               <MenuIcon/>
             </IconButton>
-            <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+            <Typography className={classes.title} variant="h6" color="inherit"
+                        noWrap>
               Columbia University Hiking Club
             </Typography>
             <div className={classes.grow}/>
@@ -161,7 +161,9 @@ class NavBar extends Component {
                 {/*<Button  color="inherit">Request a Hike</Button>*/}
                 <div>
                   <IconButton
-                    aria-describedby={profileOpen ? 'menu-list-grow' : undefined}
+                    aria-describedby={profileOpen
+                      ? 'menu-list-grow'
+                      : undefined}
                     onClick={this.handleToggle}
                     color="inherit"
                   >
@@ -179,9 +181,11 @@ class NavBar extends Component {
                       <Grow {...TransitionProps}>
                         <Paper>
                           <MenuList>
-                            <MenuItem component={Link} to="/profile" onClick={this.handleClose}>My
+                            <MenuItem component={Link} to="/profile"
+                                      onClick={this.handleClose}>My
                               Profile</MenuItem>
-                            <MenuItem onClick={this.props.logout}>Logout</MenuItem>
+                            <MenuItem
+                              onClick={this.props.logout}>Logout</MenuItem>
                           </MenuList>
                         </Paper>
                       </Grow>
@@ -230,16 +234,19 @@ class NavBar extends Component {
             </div>
 
             <MenuList>
-              <ListLinkItem to={"/"} text={"Hikes"} icon={<Landscape/>}/>
-              <ListLinkItem to={"/membership"} text={"Become a Member"} icon={<CardMembership/>}/>
-              <ListLinkItem to={"/hike-req"} text={"Request a Hike"} icon={<Add/>}/>
-              <ListLinkItem to={"/contact"} text={"Contact Us"} icon={<ContactSupport/>}/>
+              <ListLinkItem to={'/'} text={'Hikes'} icon={<Landscape/>}/>
+              <ListLinkItem to={'/membership'} text={'Become a Member'}
+                            icon={<CardMembership/>}/>
+              <ListLinkItem to={'/hike-req'} text={'Request a Hike'}
+                            icon={<Add/>}/>
+              <ListLinkItem to={'/contact'} text={'Contact Us'}
+                            icon={<ContactSupport/>}/>
             </MenuList>
           </Drawer>
         </ClickAwayListener>
 
       </div>
-    )
+    );
   }
 }
 
@@ -253,17 +260,16 @@ NavBar.propTypes = {
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
-    isAuthenticated: state.auth.isAuthenticated
-  }
+    isAuthenticated: state.auth.isAuthenticated,
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     loadUser: () => dispatch(auth.loadUser()),
-    logout: () => dispatch(auth.logout())
-  }
-}
-
+    logout: () => dispatch(auth.logout()),
+  };
+};
 
 export default compose(
   withRouter,
