@@ -40,7 +40,7 @@ class HikeRequestPage extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.rq(this.state.email, this.state.password);
+    this.props.request(this.state.email, this.state.password);
   };
 
   handleChange = e => {
@@ -58,8 +58,19 @@ class HikeRequestPage extends Component {
     return (
       <Paper className={classes.paper}>
         <Typography component="h1" variant="h5">
+          Request a Hike
         </Typography>
         <form onSubmit={this.handleSubmit}>
+          <TextField
+            id="datetime-local"
+            label="Next appointment"
+            type="datetime-local"
+            defaultValue="2017-05-24T10:30"
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="email">Email Address</InputLabel>
             <Input name="email" id="email" autoComplete="email" onChange={this.handleChange} autoFocus/>
@@ -85,9 +96,6 @@ class HikeRequestPage extends Component {
             Login
           </Button>
         </form>
-        <Typography component="h6">
-          Don't have an account? <Link to="/register">Register</Link>
-        </Typography>
       </Paper>
     )
   }

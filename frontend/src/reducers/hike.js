@@ -3,23 +3,22 @@ const initialState = {
   received: false,
   hikes: null,
   // user: false,
-  errors: {},
-};
+  errors: {}
+}
 
-
-export default function hike(state = initialState, action) {
-  console.log(state);
+export default function hike (state = initialState, action) {
+  console.log(state)
   switch (action.type) {
     case 'HIKE_LOADING':
-      return {...state, isLoading: true, received: false};
+      return { ...state, isLoading: true, received: false }
 
     case 'HIKE_LOADED':
       return {
         ...state,
         hikes: action.hikes,
         isLoading: false,
-        received: true,
-      };
+        received: true
+      }
 
     case 'HIKE_ERROR':
       // localStorage.removeItem("token");
@@ -28,7 +27,7 @@ export default function hike(state = initialState, action) {
         errors: action.data,
         isLoading: false,
         received: false
-      };
+      }
 
     case 'REQUEST_SUCCESSFUL':
       return {
@@ -36,7 +35,7 @@ export default function hike(state = initialState, action) {
         hikes: action.hikes,
         isLoading: false,
         received: true
-      };
+      }
 
     case 'REQUEST_FAILED':
       return {
@@ -44,9 +43,9 @@ export default function hike(state = initialState, action) {
         errors: action.data,
         isLoading: false,
         received: false
-      };
+      }
 
     default:
-      return state;
+      return state
   }
 }

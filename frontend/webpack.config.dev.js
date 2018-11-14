@@ -1,14 +1,13 @@
-import webpack from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import path from 'path';
-import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
-import BundleTracker from 'webpack-bundle-tracker';
+import webpack from 'webpack'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import path from 'path'
+import HardSourceWebpackPlugin from 'hard-source-webpack-plugin'
+import BundleTracker from 'webpack-bundle-tracker'
 import {
   backendPath,
   frontendPath,
-  DEV_SERVER,
+  DEV_SERVER
 } from './tools/exposePaths'
-
 
 export default {
   resolve: {
@@ -21,7 +20,7 @@ export default {
       './src/webpack-public-path',
       'react-hot-loader/patch',
       `webpack-hot-middleware/client?path=${DEV_SERVER}__webpack_hmr&reload=true&__webpack_public_path=${DEV_SERVER}`,
-      path.resolve(frontendPath, 'src/index.js'), // Defining path seems necessary for this to work consistently on Windows machines.
+      path.resolve(frontendPath, 'src/index.js') // Defining path seems necessary for this to work consistently on Windows machines.
     ]
   },
   target: 'web',
@@ -29,7 +28,7 @@ export default {
   output: {
     path: path.resolve(frontendPath, 'dist'), // Note: Physical files are only output by the production build task `npm run build`.
     publicPath: DEV_SERVER,
-    filename: '[name].[hash].js'
+    filename: '[name].js'
   },
   plugins: [
     new HardSourceWebpackPlugin(),
@@ -50,79 +49,79 @@ export default {
   ],
   module: {
     rules: [{
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: ['babel-loader']
-      },
-      {
-        test: /\.eot(\?v=\d+.\d+.\d+)?$/,
-        use: ['file-loader']
-      },
-      {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: [{
-          loader: 'url-loader',
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      use: ['babel-loader']
+    },
+    {
+      test: /\.eot(\?v=\d+.\d+.\d+)?$/,
+      use: ['file-loader']
+    },
+    {
+      test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          mimetype: 'application/font-woff'
+        }
+      }]
+    },
+    {
+      test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          mimetype: 'application/octet-stream'
+        }
+      }]
+    },
+    {
+      test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          mimetype: 'image/svg+xml'
+        }
+      }]
+    },
+    {
+      test: /\.(jpe?g|png|gif|ico)$/i,
+      use: [{
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]'
+        }
+      }]
+    },
+    {
+      test: /(\.css|\.scss|\.sass)$/,
+      use: [
+        'style-loader',
+        {
+          loader: 'css-loader',
           options: {
-            limit: 10000,
-            mimetype: 'application/font-woff'
+            sourceMap: true
           }
-        }]
-      },
-      {
-        test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
-        use: [{
-          loader: 'url-loader',
+        }, {
+          loader: 'postcss-loader',
           options: {
-            limit: 10000,
-            mimetype: 'application/octet-stream'
+            plugins: () => [
+              require('autoprefixer')
+            ],
+            sourceMap: true
           }
-        }]
-      },
-      {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{
-          loader: 'url-loader',
+        }, {
+          loader: 'sass-loader',
           options: {
-            limit: 10000,
-            mimetype: 'image/svg+xml'
+            includePaths: [path.resolve(backendPath, 'src', 'scss')],
+            sourceMap: true
           }
-        }]
-      },
-      {
-        test: /\.(jpe?g|png|gif|ico)$/i,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]'
-          }
-        }]
-      },
-      {
-        test: /(\.css|\.scss|\.sass)$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
-          }, {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [
-                require('autoprefixer')
-              ],
-              sourceMap: true
-            }
-          }, {
-            loader: 'sass-loader',
-            options: {
-              includePaths: [path.resolve(backendPath, 'src', 'scss')],
-              sourceMap: true
-            }
-          }
-        ]
-      }
+        }
+      ]
+    }
     ]
   }
-};
+}

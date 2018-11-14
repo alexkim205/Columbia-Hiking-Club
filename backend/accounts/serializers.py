@@ -57,7 +57,7 @@ class HikerRegisterSerializer(serializers.Serializer):
 # - https://github.com/Tivix/django-rest-auth/blob/master/rest_auth/serializers.py
 # - https://iheanyi.com/journal/user-registration-authentication-with-django-django-rest-framework-react-and-redux/
 class HikerLoginSerializer(serializers.Serializer):
-    email = serializers.EmailField(required=False, allow_blank=True)
+    email = serializers.EmailField(required=True)
     password = serializers.CharField(style={'input_type': 'password'})
 
     def _validate_email(self, email, password):
@@ -71,9 +71,6 @@ class HikerLoginSerializer(serializers.Serializer):
 
         return user
 
-    # def _validate_password(self, password):
-    #     validate_password(password, user=None)
-    #     return password
 
     def validate(self, attrs):
         email = attrs.get('email')

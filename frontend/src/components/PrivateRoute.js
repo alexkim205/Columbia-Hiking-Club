@@ -1,27 +1,25 @@
-import {Redirect, Route} from "react-router-dom";
-import React, {Component} from "react";
+import { Redirect, Route } from 'react-router-dom'
+import React, { Component } from 'react'
 
-import {auth} from "../actions";
-import {compose} from "redux";
-import {connect} from "react-redux";
-import {hot} from "react-hot-loader";
-import PropTypes from "prop-types";
-
+import { auth } from '../actions'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { hot } from 'react-hot-loader'
+import PropTypes from 'prop-types'
 
 // class PrivateRoute extends Component {
 //
 // }
 
 class PrivateRoute extends Component {
-
-  componentDidMount() {
-    this.props.loadUser();
+  componentDidMount () {
+    this.props.loadUser()
   }
 
-  render() {
-    const {component: ChildComponent,
-      auth: auth,
-      ...rest} = this.props;
+  render () {
+    const { component: ChildComponent,
+      auth,
+      ...rest } = this.props
 
     return (
       <Route
@@ -30,34 +28,33 @@ class PrivateRoute extends Component {
           if (auth.isLoading) {
             return <em>Loading...</em>
           } else if (!auth.isAuthenticated) {
-            return <Redirect to="/login"/>
+            return <Redirect to='/login' />
           } else {
-            return <ChildComponent {...props}/>
+            return <ChildComponent {...props} />
           }
-        }}/>
+        }} />
     )
   }
 }
 
 PrivateRoute.propTypes = {
   component: PropTypes.func.isRequired
-};
-
+}
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth,
+    auth: state.auth
   }
-};
+}
 
 const mapDispatchToProps = dispatch => {
   return {
     loadUser: () => {
-      return dispatch(auth.loadUser());
+      return dispatch(auth.loadUser())
     }
   }
-};
+}
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-)(PrivateRoute);
+  connect(mapStateToProps, mapDispatchToProps)
+)(PrivateRoute)

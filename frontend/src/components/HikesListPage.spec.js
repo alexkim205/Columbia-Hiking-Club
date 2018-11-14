@@ -1,16 +1,16 @@
 // Must have at least one test file in this directory or Mocha will throw an error.
-import React from 'react';
-import { shallow } from 'enzyme';
-import HikeListPage from './HikeListPage';
+import React from 'react'
+import { shallow } from 'enzyme'
+import HikeListPage from './HikeListPage'
 
 describe('<HikeListPage />', () => {
   it('should have a header called \'Hike List Page\'', () => {
-    const wrapper = shallow(<HikeListPage />);
-    const actual = wrapper.find('h4').text();
-    const expected = 'Hike List Page';
+    const wrapper = shallow(<HikeListPage />)
+    const actual = wrapper.find('h4').text()
+    const expected = 'Hike List Page'
 
-    expect(actual).toEqual(expected);
-  });
+    expect(actual).toEqual(expected)
+  })
 
   // it('should have a header with \'alt-header\' class', () => {
   //   const wrapper = shallow(<AboutPage />);
@@ -27,4 +27,4 @@ describe('<HikeListPage />', () => {
   //
   //   expect(actual).toEqual(expected);
   // });
-});
+})

@@ -1,14 +1,14 @@
-import React, {Component} from "react";
-import PropTypes from 'prop-types';
-import {Link} from "react-router-dom";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
-import withStyles from "@material-ui/core/styles/withStyles";
-import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText/ListItemText";
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItem from "@material-ui/core/ListItem/ListItem";
-import Avatar from '@material-ui/core/Avatar';
-import Divider from '@material-ui/core/Divider';
+import withStyles from '@material-ui/core/styles/withStyles'
+import ListItemIcon from '@material-ui/core/ListItemIcon/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText/ListItemText'
+import MenuItem from '@material-ui/core/MenuItem'
+import ListItem from '@material-ui/core/ListItem/ListItem'
+import Avatar from '@material-ui/core/Avatar'
+import Divider from '@material-ui/core/Divider'
 
 const styles = theme => ({
   menuitem: {
@@ -22,24 +22,22 @@ const styles = theme => ({
 })
 
 class ListLinkItem extends Component {
-
-  render() {
-    const {classes, to, icon, text} = this.props;
+  render () {
+    const { classes, to, icon, text } = this.props
     return (
       <React.Fragment>
         <MenuItem component={Link} to={to} button className={classes.menuitem}>
           <Avatar>
             {icon}
           </Avatar>
-          <ListItemText primary={text}/>
+          <ListItemText primary={text} />
         </MenuItem>
-        {/*<li className={classes.divider}>*/}
-          {/*<Divider inset />*/}
-        {/*</li>*/}
+        {/* <li className={classes.divider}> */}
+        {/* <Divider inset /> */}
+        {/* </li> */}
       </React.Fragment>
     )
   }
-
 }
 
 ListLinkItem.propTypes = {
@@ -48,4 +46,4 @@ ListLinkItem.propTypes = {
   text: PropTypes.string.isRequired
 }
 
-export default withStyles(styles)(ListLinkItem);
+export default withStyles(styles)(ListLinkItem)
