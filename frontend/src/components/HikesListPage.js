@@ -1,9 +1,9 @@
-import React, { Component }           from 'react';
-import { connect }                    from 'react-redux';
-import { Redirect, Link, withRouter } from 'react-router-dom';
-import { compose }                    from 'redux';
-import PropTypes                      from 'prop-types';
-import { hot }                        from 'react-hot-loader';
+import React, { Component } from 'react';
+import { connect }          from 'react-redux';
+import { withRouter }       from 'react-router-dom';
+import { compose }          from 'redux';
+import PropTypes            from 'prop-types';
+import { hot }              from 'react-hot-loader';
 
 import { hike } from '../actions';
 

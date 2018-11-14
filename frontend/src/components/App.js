@@ -2,7 +2,7 @@
 import React, { Component }                   from 'react';
 import { hot }                                from 'react-hot-loader';
 import PropTypes                              from 'prop-types';
-import { NavLink, Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect }                            from 'react-redux';
 import { compose }                            from 'redux';
 import classNames                             from 'classnames';
@@ -10,7 +10,6 @@ import classNames                             from 'classnames';
 import { auth } from '../actions';
 
 import NavBar          from './NavBar';
-// import Sidebar from "./Sidebar";
 import PrivateRoute    from './PrivateRoute';
 import ProfilePage     from './ProfilePage';
 import LoginPage       from './LoginPage';
@@ -19,15 +18,14 @@ import HikesListPage   from './HikesListPage';
 import HikeRequestPage from './HikeRequestPage';
 import NotFoundPage    from './NotFoundPage';
 
-import withStyles                           from '@material-ui/core/styles/withStyles';
-import CssBaseline
-                                            from '@material-ui/core/CssBaseline';
-import Typography                           from '@material-ui/core/Typography';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import blue
-                                            from '@material-ui/core/colors/blue';
-import pink
-                                            from '@material-ui/core/colors/pink';
+import withStyles  from '@material-ui/core/styles/withStyles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import {
+  MuiThemeProvider,
+  createMuiTheme,
+}                  from '@material-ui/core/styles';
+// import blue from '@material-ui/core/colors/blue';
+// import pink from '@material-ui/core/colors/pink';
 
 // import 'typeface-roboto';
 

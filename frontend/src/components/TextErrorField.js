@@ -3,22 +3,16 @@ import PropTypes            from 'prop-types';
 import { connect }          from 'react-redux';
 import { compose }          from 'redux';
 import { withRouter }       from 'react-router-dom';
-import classNames           from 'classnames';
-import withStyles           from '@material-ui/core/styles/withStyles';
-import * as auth            from '../actions/auth';
-import FormControl          from '@material-ui/core/FormControl/FormControl';
-import InputLabel           from '@material-ui/core/InputLabel/InputLabel';
-import FilledInput          from '@material-ui/core/FilledInput/FilledInput';
-import InputAdornment       from '@material-ui/core/InputAdornment/InputAdornment';
-import IconButton           from '@material-ui/core/IconButton/IconButton';
-import VisibilityOff        from '@material-ui/core/SvgIcon/SvgIcon';
-import FormHelperText       from '@material-ui/core/FormHelperText/FormHelperText';
+
+import withStyles     from '@material-ui/core/styles/withStyles';
+import FormControl    from '@material-ui/core/FormControl/FormControl';
+import InputLabel     from '@material-ui/core/InputLabel/InputLabel';
+import FilledInput    from '@material-ui/core/FilledInput/FilledInput';
+import FormHelperText from '@material-ui/core/FormHelperText/FormHelperText';
 
 const styles = theme => {
   return {
-    paper: {
-      padding: '30px',
-    },
+    formControl: {},
   };
 };
 
@@ -28,41 +22,43 @@ class TextErrorField extends Component {
 
   state = {};
 
+  findErrorMessage = (field) => {
+    let {errors} = this.props;
+    let error_fields = errors.map(e => e.field);
+    let error_messages = errors.map(e => e.message);
+    return (error_fields.includes(field)) ?
+      error_messages[error_fields.indexOf(field)] :
+      '';
+  };
+
   render () {
     const {classes, errors} = this.props;
+    const error_fields = errors.map(e => e.field);
+    const aria_describedby = this.props.id + '-error-text';
 
     return (
       <React.Fragment>
 
         <FormControl
           className={classes.formControl}
-          variant="filled"
-          value="password"
-          aria-describedby="password-error-text"
-          error={error_fields.includes('password')}
+          variant={this.props.variant}
+          value={this.props.id}
+          aria-describedby={aria_describedby}
+          error={error_fields.includes(this.props.id)}
         >
-          <InputLabel htmlFor="password">Password</InputLabel>
+          <InputLabel htmlFor="password">{this.props.label}</InputLabel>
           <FilledInput
-            id="password"
-            type={this.state.showPassword ? 'text' : 'password'}
-            name="password"
-            autoComplete="current-password"
-            onChange={this.handleChange}
-            endAdornment={
-              <InputAdornment variant="filled" position="end">
-                <IconButton
-                  aria-label="Toggle password visibility"
-                  onClick={this.handleClickShowPassword}
-                >
-                  {this.state.showPassword ? <VisibilityOff/> : <Visibility/>}
-                </IconButton>
-              </InputAdornment>
-            }
+            id={this.props.id}
+            type={this.props.type}
+            name={this.props.id}
+            autoComplete={this.props.autoComplete}
+            onChange={this.props.handleChange}
+            endAdornment={this.props.adornment}
           />
 
-          <FormHelperText id="password-error-text"
-                          disabled={!error_fields.includes('password')}>
-            {this.findErrorMessage('password')}
+          <FormHelperText id={aria_describedby}
+                          disabled={!error_fields.includes(this.props.id)}>
+            {this.findErrorMessage(this.props.id)}
           </FormHelperText>
 
         </FormControl>
@@ -74,9 +70,16 @@ class TextErrorField extends Component {
 }
 
 TextErrorField.propTypes = {
-  classes: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
+  label: PropTypes.string.isRequired,
+  variant: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  autoComplete: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
   adornment: PropTypes.element,
+
+  classes: PropTypes.object.isRequired,
+  errors: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = state => {

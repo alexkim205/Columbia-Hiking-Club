@@ -1,10 +1,10 @@
-import React, { Component }           from 'react';
-import { Redirect, Link, withRouter } from 'react-router-dom';
-import { compose }                    from 'redux';
-import PropTypes                      from 'prop-types';
+import React, { Component } from 'react';
+import { withRouter }       from 'react-router-dom';
+import { compose }          from 'redux';
+import PropTypes            from 'prop-types';
 import withStyles
-                                      from '@material-ui/core/styles/withStyles';
-import { hot }                        from 'react-hot-loader';
+                            from '@material-ui/core/styles/withStyles';
+import { hot }              from 'react-hot-loader';
 
 import { XMasonry, XBlock } from 'react-xmasonry/dist/index.js'; // Imports precompiled bundle
 

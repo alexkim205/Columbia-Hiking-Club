@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes            from 'prop-types';
 import { Link }             from 'react-router-dom';
-
-import withStyles   from '@material-ui/core/styles/withStyles';
-import ListItemIcon from '@material-ui/core/ListItemIcon/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText/ListItemText';
-import MenuItem     from '@material-ui/core/MenuItem';
-import ListItem     from '@material-ui/core/ListItem/ListItem';
-import Avatar       from '@material-ui/core/Avatar';
-import Divider      from '@material-ui/core/Divider';
+import withStyles           from '@material-ui/core/styles/withStyles';
+import ListItemText         from '@material-ui/core/ListItemText/ListItemText';
+import MenuItem             from '@material-ui/core/MenuItem';
+import Avatar               from '@material-ui/core/Avatar';
 
 const styles = theme => ({
   menuitem: {

@@ -19,19 +19,14 @@ import CardMembership    from '@material-ui/icons/CardMembership';
 import AccountCircle     from '@material-ui/icons/AccountCircle';
 import ContactSupport    from '@material-ui/icons/ContactSupport';
 import MenuItem          from '@material-ui/core/MenuItem';
-import Menu              from '@material-ui/core/Menu';
 import MenuList          from '@material-ui/core/MenuList';
 import Button            from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow              from '@material-ui/core/Grow';
 import Paper             from '@material-ui/core/Paper';
 import Popper            from '@material-ui/core/Popper';
-import Popover           from '@material-ui/core/Popover';
 import ChevronLeftIcon   from '@material-ui/icons/ChevronLeft';
-import Divider           from '@material-ui/core/Divider/Divider';
-import List              from '@material-ui/core/List/List';
 import Drawer            from '@material-ui/core/Drawer/Drawer';
-import Avatar            from '@material-ui/core/Avatar';
 
 import ListLinkItem from './ListLinkItem';
 
