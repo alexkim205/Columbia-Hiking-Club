@@ -1,10 +1,10 @@
-import { NavLink, withRouter, Link, Route } from 'react-router-dom';
-import PropTypes                            from 'prop-types';
-import React, { Component }                 from 'react';
-import classNames                           from 'classnames';
-import { compose }                          from 'redux';
-import { connect }                          from 'react-redux';
-import { hot }                              from 'react-hot-loader';
+import { withRouter, Link } from 'react-router-dom';
+import PropTypes            from 'prop-types';
+import React, { Component } from 'react';
+import classNames           from 'classnames';
+import { compose }          from 'redux';
+import { connect }          from 'react-redux';
+import { hot }              from 'react-hot-loader';
 
 import withStyles        from '@material-ui/core/styles/withStyles';
 import AppBar            from '@material-ui/core/AppBar';
@@ -23,8 +23,10 @@ import MenuList          from '@material-ui/core/MenuList';
 import Button            from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow              from '@material-ui/core/Grow';
+import Collapse from '@material-ui/core/Collapse';
 import Paper             from '@material-ui/core/Paper';
 import Popper            from '@material-ui/core/Popper';
+import Popover from '@material-ui/core/Popover';
 import ChevronLeftIcon   from '@material-ui/icons/ChevronLeft';
 import Drawer            from '@material-ui/core/Drawer/Drawer';
 
@@ -107,10 +109,6 @@ class NavBar extends Component {
   };
 
   handleClose = event => {
-    if (this.anchorEl.contains(event.target)) {
-      return;
-    }
-
     this.setState({
       anchorEl: null,
       profileOpen: false,
@@ -153,7 +151,6 @@ class NavBar extends Component {
                 >
                   <AddCircleOutline/>
                 </IconButton>
-                {/*<Button  color="inherit">Request a Hike</Button>*/}
                 <div>
                   <IconButton
                     aria-describedby={profileOpen
@@ -164,29 +161,48 @@ class NavBar extends Component {
                   >
                     <AccountCircle/>
                   </IconButton>
-                  <Popper
-                    id="menu-list-grow"
-                    placement="bottom-end"
-                    open={profileOpen}
-                    onClose={this.handleClose}
-                    anchorEl={anchorEl}
-                    transition
-                  >
-                    {({TransitionProps}) => (
-                      <Grow {...TransitionProps}>
-                        <Paper>
-                          <MenuList>
-                            <MenuItem component={Link} to="/profile"
-                                      onClick={this.handleClose}>My
-                              Profile</MenuItem>
-                            <MenuItem
-                              onClick={this.props.logout}>Logout</MenuItem>
-                          </MenuList>
-                        </Paper>
-                      </Grow>
-                    )}
+                  {/*<ClickAwayListener onClickAway={this.handleClose}>*/}
+                    <Popover
+                      id="menu-list-grow"
+                      placement="bottom-end"
+                      open={profileOpen}
+                      onClose={this.handleClose}
+                      anchorEl={anchorEl}
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                      }}
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      // TransitionComponent="collapse"
+                    >
+                      <Paper>
+                        <MenuList>
+                          <MenuItem component={Link} to="/profile"
+                                    onClick={this.handleClose}>My
+                            Profile</MenuItem>
+                          <MenuItem
+                            onClick={this.props.logout}>Logout</MenuItem>
+                        </MenuList>
+                      </Paper>
+                      {/*{({TransitionProps}) => (*/}
+                        {/*<Grow {...TransitionProps}>*/}
+                          {/*<Paper>*/}
+                            {/*<MenuList>*/}
+                              {/*<MenuItem component={Link} to="/profile"*/}
+                                        {/*onClick={this.handleClose}>My*/}
+                                {/*Profile</MenuItem>*/}
+                              {/*<MenuItem*/}
+                                {/*onClick={this.props.logout}>Logout</MenuItem>*/}
+                            {/*</MenuList>*/}
+                          {/*</Paper>*/}
+                        {/*</Grow>*/}
+                      {/*)}*/}
 
-                  </Popper>
+                    </Popover>
+                  {/*</ClickAwayListener>*/}
                 </div>
               </React.Fragment>
             ) : (

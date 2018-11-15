@@ -9,6 +9,7 @@ import FormControl    from '@material-ui/core/FormControl/FormControl';
 import InputLabel     from '@material-ui/core/InputLabel/InputLabel';
 import FilledInput    from '@material-ui/core/FilledInput/FilledInput';
 import FormHelperText from '@material-ui/core/FormHelperText/FormHelperText';
+import Select         from '@material-ui/core/Select';
 
 const styles = theme => {
   return {
@@ -34,11 +35,12 @@ class TextErrorField extends Component {
   render () {
     const {classes, errors} = this.props;
     const {
-      variant, id, label, type,
+      variant, id, label, type
     } = this.props;
 
     const labelProps = this.props.labelProps ? this.props.labelProps : {};
     const inputProps = this.props.inputProps ? this.props.inputProps : {};
+
 
     const error_fields = errors.map(e => e.field);
     const aria_describedby = this.props.id + '-error-text';
@@ -54,17 +56,17 @@ class TextErrorField extends Component {
           error={error_fields.includes(id)}
         >
           <InputLabel
-            htmlFor={id}
+            htmlFor="password"
             {...labelProps}
           >
             {label}
           </InputLabel>
-          <FilledInput
-            id={id}
-            type={type}
-            name={id}
+          <Select
+            input={<FilledInput name={id} id={id} />}
             {...inputProps}
-          />
+          >
+            {this.props.children}
+          </Select>
 
           <FormHelperText id={aria_describedby}
                           disabled={!error_fields.includes(id)}>
@@ -83,7 +85,6 @@ TextErrorField.propTypes = {
   label: PropTypes.string.isRequired,
   variant: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
 
   labelProps: PropTypes.object,
   inputProps: PropTypes.object,

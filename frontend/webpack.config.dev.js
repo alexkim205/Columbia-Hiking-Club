@@ -24,9 +24,9 @@ export default {
       'react-hot-loader/patch',
       `webpack-hot-middleware/client?path=${DEV_SERVER}__webpack_hmr&reload=true&__webpack_public_path=${DEV_SERVER}`,
       path.resolve(frontendPath, 'src/index.js'), // Defining path seems
-                                                 // necessary for this to work
-                                                 // consistently on Windows
-                                                 // machines.
+      // necessary for this to work
+      // consistently on Windows
+      // machines.
     ],
   },
   target: 'web',

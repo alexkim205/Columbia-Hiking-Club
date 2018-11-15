@@ -4,15 +4,20 @@ import { Redirect, Link, withRouter } from 'react-router-dom';
 import { compose }                    from 'redux';
 import PropTypes                      from 'prop-types';
 
-import { auth } from '../actions';
+import { auth }       from '../actions';
+import TextErrorField from './TextErrorField';
 
-import Button           from '@material-ui/core/Button';
-import FormControl      from '@material-ui/core/FormControl';
-import Input            from '@material-ui/core/Input';
-import InputLabel       from '@material-ui/core/InputLabel';
-import Paper            from '@material-ui/core/Paper';
-import Typography       from '@material-ui/core/Typography';
-import withStyles       from '@material-ui/core/styles/withStyles';
+import Button         from '@material-ui/core/Button';
+import FormControl    from '@material-ui/core/FormControl';
+import Input          from '@material-ui/core/Input';
+import InputLabel     from '@material-ui/core/InputLabel';
+import Paper          from '@material-ui/core/Paper';
+import Typography     from '@material-ui/core/Typography';
+import withStyles     from '@material-ui/core/styles/withStyles';
+import InputAdornment from '@material-ui/core/InputAdornment/InputAdornment';
+import IconButton     from '@material-ui/core/IconButton/IconButton';
+import Visibility     from '@material-ui/icons/Visibility';
+import VisibilityOff  from '@material-ui/icons/VisibilityOff';
 
 const styles = theme => {
   return {
@@ -29,6 +34,7 @@ class RegisterPage extends Component {
     last_name: '',
     email: '',
     password: '',
+    showPassword: false,
   };
 
   handleSubmit = e => {
@@ -45,9 +51,14 @@ class RegisterPage extends Component {
     this.setState({[e.target.name]: e.target.value});
   };
 
+  handleClickShowPassword = () => {
+    this.setState(state => ({showPassword: !state.showPassword}));
+  };
+
   render () {
 
-    const {classes} = this.props;
+    const {errors, classes} = this.props;
+    const error_fields = errors.map(e => e.field);
 
     if (this.props.isAuthenticated) {
       return <Redirect to="/"/>;
@@ -55,39 +66,72 @@ class RegisterPage extends Component {
 
     return (
       <React.Fragment>
-        <Typography component="h1" variant="h5">
-          Register
-        </Typography>
         <Paper className={classes.paper}>
+          <Typography component="h1" variant="h5">
+            Register
+          </Typography>
+
           <form onSubmit={this.handleSubmit}>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="first_name">First Name</InputLabel>
-              <Input name="first_name" id="first_name" autoComplete="fname"
-                     onChange={this.handleChange} autoFocus/>
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="last_name">Last Name</InputLabel>
-              <Input name="last_name" id="last_name" autoComplete="lname"
-                     onChange={this.handleChange} autoFocus/>
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="email">Email Address</InputLabel>
-              <Input name="email" id="email" autoComplete="email"
-                     onChange={this.handleChange} autoFocus/>
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <Input name="password" type="password" id="password"
-                     onChange={this.handleChange}
-                     autoComplete="current-password"/>
-            </FormControl>
-            {this.props.errors.length > 0 && (
-              <ul>
-                {this.props.errors.map(error => (
-                  <li key={error.field}>{error.message}</li>
-                ))}
-              </ul>
+            <TextErrorField
+              label="First Name"
+              variant="filled"
+              id="first_name"
+              type="text"
+              errors={errors}
+              inputProps={{
+                autoFocus: true,
+                onChange: this.handleChange,
+                autoComplete: 'fname',
+              }}
+            />
+            <TextErrorField
+              label="Last Name"
+              variant="filled"
+              id="last_name"
+              type="text"
+              errors={errors}
+              inputProps={{
+                onChange: this.handleChange,
+                autoComplete: 'lname',
+              }}
+            />
+            <TextErrorField
+              label="Email"
+              variant="filled"
+              id="email"
+              type="email"
+              errors={errors}
+              inputProps={{
+                onChange: this.handleChange,
+                autoComplete: 'email',
+              }}
+            />
+
+            <TextErrorField
+              label="Password"
+              variant="filled"
+              id="password"
+              type={this.state.showPassword ? 'text' : 'password'}
+              errors={errors}
+              inputProps={{
+                onChange: this.handleChange,
+                autoComplete: 'current-password',
+                endAdornment:
+                  <InputAdornment variant="filled" position="end">
+                    <IconButton
+                      aria-label="Toggle password visibility"
+                      onClick={this.handleClickShowPassword}
+                    >
+                      {this.state.showPassword ? <VisibilityOff/> : <Visibility/>}
+                    </IconButton>
+                  </InputAdornment>,
+              }}
+            />
+            {error_fields.includes('non_field_errors') && (
+              <h5>{errors[error_fields.indexOf(
+                'non_field_errors')]['message']}</h5>
             )}
+
             <Button
               type="submit"
               fullWidth
@@ -107,7 +151,8 @@ class RegisterPage extends Component {
 }
 
 RegisterPage.propTypes = {
-  classes: PropTypes.object,
+  classes: PropTypes.object.isRequired,
+  errors: PropTypes.array,
 };
 
 const mapStateToProps = state => {

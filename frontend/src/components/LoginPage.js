@@ -58,66 +58,75 @@ class LoginPage extends Component {
     }
 
     return (
-      <Paper className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form onSubmit={this.handleSubmit}>
+      <React.Fragment>
+        <Paper className={classes.paper}>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <form onSubmit={this.handleSubmit}>
 
-          <TextErrorField
-            label="Email"
-            variant="filled"
-            id="email"
-            type="email"
-            autoComplete="email"
-            handleChange={this.handleChange}
-            errors={errors}
-          />
+            <TextErrorField
+              label="Email"
+              variant="filled"
+              id="email"
+              type="email"
+              errors={errors}
+              inputProps={{
+                autoFocus: true,
+                onChange: this.handleChange,
+                autoComplete: 'email',
+                endAdornment: undefined,
+                inputComponent: undefined,
+              }}
+            />
 
-          <TextErrorField
-            label="Password"
-            variant="filled"
-            id="password"
-            type={this.state.showPassword ? 'text' : 'password'}
-            autoComplete="current-password"
-            handleChange={this.handleChange}
-            errors={errors}
-            adornment={
-              <InputAdornment variant="filled" position="end">
-                <IconButton
-                  aria-label="Toggle password visibility"
-                  onClick={this.handleClickShowPassword}
-                >
-                  {this.state.showPassword ? <VisibilityOff/> : <Visibility/>}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
+            <TextErrorField
+              label="Password"
+              variant="filled"
+              id="password"
+              type={this.state.showPassword ? 'text' : 'password'}
+              errors={errors}
+              inputProps={{
+                onChange: this.handleChange,
+                autoComplete: 'current-password',
+                endAdornment:
+                  <InputAdornment variant="filled" position="end">
+                    <IconButton
+                      aria-label="Toggle password visibility"
+                      onClick={this.handleClickShowPassword}
+                    >
+                      {this.state.showPassword ? <VisibilityOff/> : <Visibility/>}
+                    </IconButton>
+                  </InputAdornment>,
+              }}
+            />
 
-          {error_fields.includes('non_field_errors') && (
-            <h5>{errors[error_fields.indexOf(
-              'non_field_errors')]['message']}</h5>
-          )}
+            {error_fields.includes('non_field_errors') && (
+              <h5>{errors[error_fields.indexOf(
+                'non_field_errors')]['message']}</h5>
+            )}
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-          >
-            Login
-          </Button>
-        </form>
-        <Typography component="h6">
-          Don't have an account? <Link to="/register">Register</Link>
-        </Typography>
-      </Paper>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+            >
+              Login
+            </Button>
+          </form>
+          <Typography component="h6">
+            Don't have an account? <Link to="/register">Register</Link>
+          </Typography>
+        </Paper>
+      </React.Fragment>
     );
   }
 }
 
 LoginPage.propTypes = {
   classes: PropTypes.object,
+  errors: PropTypes.array,
 };
 
 const mapStateToProps = state => {
