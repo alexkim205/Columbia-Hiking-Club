@@ -1,56 +1,28 @@
 /* eslint-disable import/no-named-as-default */
-import React, { Component }                   from 'react';
-import { hot }                                from 'react-hot-loader';
-import PropTypes                              from 'prop-types';
+import React, { Component }          from 'react';
+import { hot }                       from 'react-hot-loader';
+import PropTypes                     from 'prop-types';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import { connect }                            from 'react-redux';
-import { compose }                            from 'redux';
-import classNames                             from 'classnames';
+import { connect }                   from 'react-redux';
+import { compose }                   from 'redux';
+import classNames                    from 'classnames';
 
 import { auth } from '../actions';
 
-import NavBar          from './NavBar';
-import PrivateRoute    from './PrivateRoute';
-import ProfilePage     from './ProfilePage';
-import LoginPage       from './LoginPage';
-import RegisterPage    from './RegisterPage';
-import HikesListPage   from './HikesListPage';
-import HikeRequestPage from './HikeRequestPage';
-import NotFoundPage    from './NotFoundPage';
+import NavBar               from './NavBar';
+import PrivateRoute         from './PrivateRoute';
+import ProfilePage          from './ProfilePage';
+import LoginPage            from './LoginPage';
+import RegisterPage         from './RegisterPage';
+import HikesListPage        from './HikesListPage';
+import HikeRequestPage      from './HikeRequestPage';
+import NotFoundPage         from './NotFoundPage';
 
-import withStyles  from '@material-ui/core/styles/withStyles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import {
-  MuiThemeProvider,
-  createMuiTheme,
-}                  from '@material-ui/core/styles';
-// import blue from '@material-ui/core/colors/blue';
-// import pink from '@material-ui/core/colors/pink';
-
-// import 'typeface-roboto';
-
-const theme = createMuiTheme({
-  // palette: {
-  //   primary: blue,
-  //   secondary: pink,
-  // }
-  palette: {
-    primary: {
-      light: '#8699dc',
-      main: '#2a334f',
-      dark: '#010c27',
-      contrastText: '#fff',
-    },
-    secondary: {
-      light: '#ff9f5b',
-      main: '#dd6f2e',
-      dark: '#a54100',
-      contrastText: '#fff',
-    },
-  },
-});
-
-const drawerWidth = 240;
+import 'typeface-roboto';
+import theme                from '../styles/palette';
+import withStyles           from '@material-ui/core/styles/withStyles';
+import CssBaseline          from '@material-ui/core/CssBaseline';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
 const styles = theme => ({
   content: {
@@ -60,9 +32,6 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    // marginLeft: -drawerWidth,
-    // height: '100vh',
-    // overflow: 'auto',
   },
   appBarSpacer: theme.mixins.toolbar,
 

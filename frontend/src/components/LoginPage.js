@@ -15,12 +15,55 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton     from '@material-ui/core/IconButton';
 import Visibility     from '@material-ui/icons/Visibility';
 import VisibilityOff  from '@material-ui/icons/VisibilityOff';
+import Divider        from '@material-ui/core/Divider';
+import Avatar         from '@material-ui/core/Avatar';
+import PersonOutline  from '@material-ui/icons/PersonOutline';
 import withStyles     from '@material-ui/core/styles/withStyles';
 
 const styles = theme => {
   return {
     paper: {
-      padding: '30px',
+      paddingTop: theme.spacing.unit * 5,
+      paddingBottom: theme.spacing.unit * 5,
+      paddingLeft: theme.spacing.unit * 5,
+      paddingRight: theme.spacing.unit * 5,
+      alignItems: 'center',
+      margin: '0 auto',
+      maxWidth: 400,
+    },
+    formTitle: {
+      margin: '2em 0',
+      textAlign: 'center',
+    },
+    avatar: {
+      backgroundColor: theme.palette.secondary.light,
+      alignItems: 'center',
+      margin: theme.spacing.unit * 2 + 'px auto',
+      marginTop: 0,
+      width: 100,
+      height: 100,
+    },
+    avatarIcon: {
+      width: '60%',
+      height: '60%',
+    },
+    form: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    field: {
+      marginLeft: theme.spacing.unit * 2,
+      marginRight: theme.spacing.unit * 2,
+      marginTop: theme.spacing.unit,
+      // marginBottom: theme.spacing.unit,
+    },
+    endForm: {
+      textAlign: 'center',
+    },
+    submit: {
+      margin: theme.spacing.unit * 2 + 'px auto',
+      marginBottom: theme.spacing.unit * 3,
+      minWidth: '40%',
     },
   };
 };
@@ -60,12 +103,19 @@ class LoginPage extends Component {
     return (
       <React.Fragment>
         <Paper className={classes.paper}>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form onSubmit={this.handleSubmit}>
+          <div className={classes.formTitle}>
+            <Avatar className={classes.avatar}>
+              <PersonOutline className={classes.avatarIcon}/>
+            </Avatar>
+            <Typography component="h1" variant="h4">
+              Sign in
+            </Typography>
+          </div>
+
+          <form onSubmit={this.handleSubmit} className={classes.form}>
 
             <TextErrorField
+              className={classes.field}
               label="Email"
               variant="filled"
               id="email"
@@ -81,6 +131,7 @@ class LoginPage extends Component {
             />
 
             <TextErrorField
+              className={classes.field}
               label="Password"
               variant="filled"
               id="password"
@@ -106,18 +157,20 @@ class LoginPage extends Component {
                 'non_field_errors')]['message']}</h5>
             )}
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-            >
-              Login
-            </Button>
+            <div className={classes.endForm}>
+              <Button
+                className={classes.submit}
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
+                Login
+              </Button>
+              <Typography component="caption">
+                Don't have an account? <Link to="/register">Register</Link>.
+              </Typography>
+            </div>
           </form>
-          <Typography component="h6">
-            Don't have an account? <Link to="/register">Register</Link>
-          </Typography>
         </Paper>
       </React.Fragment>
     );

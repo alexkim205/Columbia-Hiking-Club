@@ -33,14 +33,13 @@ class TextErrorField extends Component {
   };
 
   render () {
-    const {classes, errors} = this.props;
+    const {classes, className, errors} = this.props;
     const {
-      variant, id, label, type
+      variant, id, label, type,
     } = this.props;
 
     const labelProps = this.props.labelProps ? this.props.labelProps : {};
     const inputProps = this.props.inputProps ? this.props.inputProps : {};
-
 
     const error_fields = errors.map(e => e.field);
     const aria_describedby = this.props.id + '-error-text';
@@ -49,7 +48,7 @@ class TextErrorField extends Component {
       <React.Fragment>
 
         <FormControl
-          className={classes.formControl}
+          className={className}
           variant={variant}
           value={id}
           aria-describedby={aria_describedby}
@@ -62,7 +61,7 @@ class TextErrorField extends Component {
             {label}
           </InputLabel>
           <Select
-            input={<FilledInput name={id} id={id} />}
+            input={<FilledInput name={id} id={id}/>}
             {...inputProps}
           >
             {this.props.children}
@@ -82,6 +81,7 @@ class TextErrorField extends Component {
 }
 
 TextErrorField.propTypes = {
+  className: PropTypes.string,
   label: PropTypes.string.isRequired,
   variant: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
@@ -91,6 +91,10 @@ TextErrorField.propTypes = {
 
   classes: PropTypes.object.isRequired,
   errors: PropTypes.array.isRequired,
+};
+
+TextErrorField.defaultProps = {
+  className: '',
 };
 
 const mapStateToProps = state => {

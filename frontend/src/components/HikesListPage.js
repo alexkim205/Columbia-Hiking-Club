@@ -86,7 +86,7 @@ const mapStateToProps = state => {
   return {
     errors,
     hikeData: state.hike.hikes,
-    hikeReceived: state.hike.received,
+    hikeReceived: state.hike.hikeReceived,
   };
 };
 

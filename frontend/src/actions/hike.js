@@ -35,7 +35,7 @@ export const request = (
   want_to_lead,
 ) => {
   return (dispatch, getState) => {
-    dispatch({type: 'HIKE_LOADING'});
+    dispatch({type: 'REQUEST_LOADING'});
 
     let headers = {
       'Content-type': 'application/json',
@@ -48,7 +48,7 @@ export const request = (
       want_to_lead,
     });
 
-    return fetch('/api/hike-reqs/register', {headers, body, method: 'POST'}).
+    return fetch('/api/hike-reqs/register/', {headers, body, method: 'POST'}).
       then(res => {
         if (res.status < 500) {
           return res.json().then(data => {

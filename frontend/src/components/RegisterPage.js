@@ -7,22 +7,64 @@ import PropTypes                      from 'prop-types';
 import { auth }       from '../actions';
 import TextErrorField from './TextErrorField';
 
-import Button         from '@material-ui/core/Button';
-import FormControl    from '@material-ui/core/FormControl';
-import Input          from '@material-ui/core/Input';
-import InputLabel     from '@material-ui/core/InputLabel';
-import Paper          from '@material-ui/core/Paper';
-import Typography     from '@material-ui/core/Typography';
-import withStyles     from '@material-ui/core/styles/withStyles';
-import InputAdornment from '@material-ui/core/InputAdornment/InputAdornment';
-import IconButton     from '@material-ui/core/IconButton/IconButton';
-import Visibility     from '@material-ui/icons/Visibility';
-import VisibilityOff  from '@material-ui/icons/VisibilityOff';
+import Button            from '@material-ui/core/Button';
+import FormControl       from '@material-ui/core/FormControl';
+import Input             from '@material-ui/core/Input';
+import InputLabel        from '@material-ui/core/InputLabel';
+import Paper             from '@material-ui/core/Paper';
+import Typography        from '@material-ui/core/Typography';
+import withStyles        from '@material-ui/core/styles/withStyles';
+import InputAdornment    from '@material-ui/core/InputAdornment/InputAdornment';
+import IconButton        from '@material-ui/core/IconButton/IconButton';
+import Visibility        from '@material-ui/icons/Visibility';
+import VisibilityOff     from '@material-ui/icons/VisibilityOff';
+import Avatar            from '@material-ui/core/Avatar';
+import PersonAddOutlined from '@material-ui/icons/PersonAddOutlined';
 
 const styles = theme => {
   return {
     paper: {
-      padding: '30px',
+      paddingTop: theme.spacing.unit * 5,
+      paddingBottom: theme.spacing.unit * 5,
+      paddingLeft: theme.spacing.unit * 5,
+      paddingRight: theme.spacing.unit * 5,
+      alignItems: 'center',
+      margin: '0 auto',
+      maxWidth: 400,
+    },
+    formTitle: {
+      margin: '2em 0',
+      textAlign: 'center',
+    },
+    avatar: {
+      backgroundColor: theme.palette.secondary.light,
+      alignItems: 'center',
+      margin: theme.spacing.unit * 2 + 'px auto',
+      marginTop: 0,
+      width: 100,
+      height: 100,
+    },
+    avatarIcon: {
+      width: '60%',
+      height: '60%',
+    },
+    form: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    field: {
+      marginLeft: theme.spacing.unit * 2,
+      marginRight: theme.spacing.unit * 2,
+      marginTop: theme.spacing.unit,
+      // marginBottom: theme.spacing.unit,
+    },
+    endForm: {
+      textAlign: 'center',
+    },
+    submit: {
+      margin: theme.spacing.unit * 2 + 'px auto',
+      marginBottom: theme.spacing.unit * 3,
+      minWidth: '40%',
     },
   };
 };
@@ -67,12 +109,18 @@ class RegisterPage extends Component {
     return (
       <React.Fragment>
         <Paper className={classes.paper}>
-          <Typography component="h1" variant="h5">
-            Register
-          </Typography>
+          <div className={classes.formTitle}>
+            <Avatar className={classes.avatar}>
+              <PersonAddOutlined className={classes.avatarIcon}/>
+            </Avatar>
+            <Typography component="h1" variant="h4">
+              Register
+            </Typography>
+          </div>
 
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className={classes.form}>
             <TextErrorField
+              className={classes.field}
               label="First Name"
               variant="filled"
               id="first_name"
@@ -85,6 +133,7 @@ class RegisterPage extends Component {
               }}
             />
             <TextErrorField
+              className={classes.field}
               label="Last Name"
               variant="filled"
               id="last_name"
@@ -96,6 +145,7 @@ class RegisterPage extends Component {
               }}
             />
             <TextErrorField
+              className={classes.field}
               label="Email"
               variant="filled"
               id="email"
@@ -108,6 +158,7 @@ class RegisterPage extends Component {
             />
 
             <TextErrorField
+              className={classes.field}
               label="Password"
               variant="filled"
               id="password"
@@ -132,17 +183,19 @@ class RegisterPage extends Component {
                 'non_field_errors')]['message']}</h5>
             )}
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-            >
-              Register
-            </Button>
-            <Typography component="h6">
-              Already have an account? <Link to="/login">Login</Link>
-            </Typography>
+            <div className={classes.endForm}>
+              <Button
+                className={classes.submit}
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
+                Register
+              </Button>
+              <Typography component="caption">
+                Already have an account? <Link to="/login">Login</Link>
+              </Typography>
+            </div>
           </form>
         </Paper>
       </React.Fragment>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
-import { Redirect }         from 'react-router-dom';
+import { Link, Redirect }   from 'react-router-dom';
 import { compose }          from 'redux';
 import PropTypes            from 'prop-types';
 import { withRouter }       from 'react-router-dom';
@@ -11,31 +11,60 @@ import TextErrorField   from './TextErrorField';
 import SelectErrorField from './SelectErrorField';
 import DateTimeMask     from './DateTimeMask';
 
-import Button         from '@material-ui/core/Button';
-import FormControl    from '@material-ui/core/FormControl';
-import Input          from '@material-ui/core/Input';
-import InputLabel     from '@material-ui/core/InputLabel';
-import Paper          from '@material-ui/core/Paper';
-import Typography     from '@material-ui/core/Typography';
-import withStyles     from '@material-ui/core/styles/withStyles';
-import FilledInput    from '@material-ui/core/FilledInput/FilledInput';
-import FormHelperText from '@material-ui/core/FormHelperText/FormHelperText';
-import Select         from '@material-ui/core/Select/Select';
-import MenuItem       from '@material-ui/core/MenuItem';
-
-import MaskedInput                 from 'react-text-mask';
-import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
+import Button     from '@material-ui/core/Button';
+import Paper      from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import withStyles from '@material-ui/core/styles/withStyles';
+import MenuItem   from '@material-ui/core/MenuItem';
+import Avatar     from '@material-ui/core/Avatar/Avatar';
+import Landscape  from '@material-ui/icons/Landscape';
+import NavBar     from './NavBar';
+import HikesGrid  from './HikesGrid';
 
 const styles = theme => {
   return {
     paper: {
-      padding: '30px',
+      paddingTop: theme.spacing.unit * 5,
+      paddingBottom: theme.spacing.unit * 5,
+      paddingLeft: theme.spacing.unit * 5,
+      paddingRight: theme.spacing.unit * 5,
+      alignItems: 'center',
+      margin: '0 auto',
+      maxWidth: 400,
+    },
+    formTitle: {
+      margin: '2em 0',
+      textAlign: 'center',
+    },
+    avatar: {
+      backgroundColor: theme.palette.secondary.light,
+      alignItems: 'center',
+      margin: theme.spacing.unit * 2 + 'px auto',
+      marginTop: 0,
+      width: 100,
+      height: 100,
+    },
+    avatarIcon: {
+      width: '60%',
+      height: '60%',
+    },
+    form: {
       display: 'flex',
-      flexWrap: 'wrap',
+      flexDirection: 'column',
     },
     field: {
-      marginLeft: '1em',
-      marginRight: '1em',
+      marginLeft: theme.spacing.unit * 2,
+      marginRight: theme.spacing.unit * 2,
+      marginTop: theme.spacing.unit,
+      // marginBottom: theme.spacing.unit,
+    },
+    endForm: {
+      textAlign: 'center',
+    },
+    submit: {
+      margin: theme.spacing.unit * 2 + 'px auto',
+      marginBottom: theme.spacing.unit * 3,
+      minWidth: '40%',
     },
   };
 };
@@ -52,8 +81,12 @@ class HikeRequestPage extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+
+    // put datetime in right format YYYY-MM-DDThh:mm[:ss[.uuuuuu]][+HH:MM|-HH:MM|Z]
+    let datetime = moment(this.state.date_of_hike).format('YYYY-MM-DDTHH:mm:00Z');
+
     this.props.request(
-      this.state.date_of_hike,
+      datetime,
       this.state.destination,
       this.state.description,
       this.state.difficulty,
@@ -66,20 +99,26 @@ class HikeRequestPage extends Component {
 
   render () {
 
-    const {classes, errors} = this.props;
+    const {classes, errors, requestSuccessful} = this.props;
     const error_fields = errors.map(e => e.field);
     // const errorsExist = errors.length > 0;
 
-    if (this.props.isAuthenticated) {
+    if (this.props.requestSuccessful) {
       return <Redirect to="/"/>;
     }
 
     return (
       <Paper className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          Request a Hike
-        </Typography>
-        <form onSubmit={this.handleSubmit}>
+        <div className={classes.formTitle}>
+          <Avatar className={classes.avatar}>
+            <Landscape className={classes.avatarIcon}/>
+          </Avatar>
+          <Typography component="h1" variant="h4">
+            Request a Hike
+          </Typography>
+        </div>
+
+        <form onSubmit={this.handleSubmit} className={classes.form}>
 
           <TextErrorField
             className={classes.field}
@@ -123,6 +162,7 @@ class HikeRequestPage extends Component {
             inputProps={{
               onChange: this.handleChange,
               multiline: true,
+              rows: 7,
             }}
           />
 
@@ -137,23 +177,37 @@ class HikeRequestPage extends Component {
               value: this.state.difficulty,
             }}
           >
-            <MenuItem value="Easy">Easy</MenuItem>
-            <MenuItem value="Intermediate">Intermediate</MenuItem>
-            <MenuItem value="Hard">Hard</MenuItem>
+            <MenuItem value="EASY">Easy</MenuItem>
+            <MenuItem value="INTERMEDIATE">Intermediate</MenuItem>
+            <MenuItem value="HARD">Hard</MenuItem>
           </SelectErrorField>
 
           {error_fields.includes('non_field_errors') && (
             <h5>{errors[error_fields.indexOf(
               'non_field_errors')]['message']}</h5>
           )}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-          >
-            Request this hike
-          </Button>
+
+          <div className={classes.endForm}>
+            <Button
+              className={classes.submit}
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
+              Request this hike
+            </Button>
+          </div>
+
+          {/*{requestSuccessful ? (*/}
+            {/*<Typography variant="body1">*/}
+              {/*Request successful*/}
+            {/*</Typography>*/}
+          {/*) : (*/}
+            {/*<Typography variant="body1">*/}
+              {/*Loading...*/}
+            {/*</Typography>*/}
+          {/*)}*/}
+
         </form>
       </Paper>
     );
@@ -174,6 +228,7 @@ const mapStateToProps = state => {
 
   return {
     errors,
+    requestSuccessful: state.hike.hikeReqReceived,
   };
 };
 

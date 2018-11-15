@@ -1,6 +1,8 @@
 const initialState = {
-  isLoading: true,
-  received: false,
+  hikeIsLoading: true,
+  hikeReceived: false,
+  hikeReqIsLoading: true,
+  hikeReqReceived: false,
   hikes: null,
   // user: false,
   errors: {},
@@ -10,14 +12,18 @@ export default function hike (state = initialState, action) {
   console.log(state);
   switch (action.type) {
     case 'HIKE_LOADING':
-      return {...state, isLoading: true, received: false};
+      return {
+        ...state,
+        hikeIsLoading: true,
+        hikeReceived: false,
+      };
 
     case 'HIKE_LOADED':
       return {
         ...state,
         hikes: action.hikes,
-        isLoading: false,
-        received: true,
+        hikeIsLoading: false,
+        hikeReceived: true,
       };
 
     case 'HIKE_ERROR':
@@ -25,24 +31,31 @@ export default function hike (state = initialState, action) {
       return {
         ...state,
         errors: action.data,
-        isLoading: false,
-        received: false,
+        hikeIsLoading: false,
+        hikeReceived: false,
+      };
+
+    case 'REQUEST_LOADING':
+      return {
+        ...state,
+        hikeReqIsLoading: true,
+        hikeReqReceived: false,
       };
 
     case 'REQUEST_SUCCESSFUL':
       return {
         ...state,
         hikes: action.hikes,
-        isLoading: false,
-        received: true,
+        hikeReqIsLoading: false,
+        hikeReqReceived: true,
       };
 
     case 'REQUEST_FAILED':
       return {
         ...state,
-        errors: action.data,
-        isLoading: false,
-        received: false,
+        errors: action.hikes,
+        hikeReqIsLoading: false,
+        hikeReqReceived: true,
       };
 
     default:
