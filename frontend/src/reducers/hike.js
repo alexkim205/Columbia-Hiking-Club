@@ -3,22 +3,26 @@ const initialState = {
   hikeReceived: false,
   hikeReqIsLoading: true,
   hikeReqReceived: false,
+  isRegistered: false,
   hikes: null,
+  hike: null,
+  hikeReq: null,
   // user: false,
   errors: {},
 };
 
 export default function hike (state = initialState, action) {
-  console.log(state);
+  // console.log(state);
   switch (action.type) {
     case 'HIKE_LOADING':
       return {
         ...state,
         hikeIsLoading: true,
         hikeReceived: false,
+        isRegistered: false,
       };
 
-    case 'HIKE_LOADED':
+    case 'HIKES_LOADED':
       return {
         ...state,
         hikes: action.hikes,
@@ -26,6 +30,15 @@ export default function hike (state = initialState, action) {
         hikeReceived: true,
       };
 
+    case 'HIKE_LOADED':
+      return {
+        ...state,
+        hike: action.hikes,
+        hikeIsLoading: false,
+        hikeReceived: true,
+      };
+
+    case 'HIKES_ERROR':
     case 'HIKE_ERROR':
       // localStorage.removeItem("token");
       return {
@@ -45,7 +58,7 @@ export default function hike (state = initialState, action) {
     case 'REQUEST_SUCCESSFUL':
       return {
         ...state,
-        hikes: action.hikes,
+        hikeReq: action.hikes,
         hikeReqIsLoading: false,
         hikeReqReceived: true,
       };
@@ -56,6 +69,21 @@ export default function hike (state = initialState, action) {
         errors: action.hikes,
         hikeReqIsLoading: false,
         hikeReqReceived: true,
+        hikeReq: null,
+      };
+
+    case 'REGISTER_SUCCESSFUL':
+    case 'UNREGISTER_UNSUCCESSFUL':
+      return {
+        ...state,
+        isRegistered: true,
+      }
+
+    case 'REGISTER_UNSUCCESSFUL':
+    case 'UNREGISTER_SUCCESSFUL':
+      return {
+        ...state,
+        isRegistered: false,
       };
 
     default:

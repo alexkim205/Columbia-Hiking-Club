@@ -4,13 +4,11 @@ import { Redirect, Link, withRouter } from 'react-router-dom';
 import { compose }                    from 'redux';
 import PropTypes                      from 'prop-types';
 
-import { auth }       from '../actions';
-import TextErrorField from './TextErrorField';
+import { auth }                          from '../actions';
+import TextErrorField                    from './TextErrorField';
+import { DateTimeMask, PhoneNumberMask } from './FieldMasks';
 
 import Button            from '@material-ui/core/Button';
-import FormControl       from '@material-ui/core/FormControl';
-import Input             from '@material-ui/core/Input';
-import InputLabel        from '@material-ui/core/InputLabel';
 import Paper             from '@material-ui/core/Paper';
 import Typography        from '@material-ui/core/Typography';
 import withStyles        from '@material-ui/core/styles/withStyles';
@@ -20,6 +18,10 @@ import Visibility        from '@material-ui/icons/Visibility';
 import VisibilityOff     from '@material-ui/icons/VisibilityOff';
 import Avatar            from '@material-ui/core/Avatar';
 import PersonAddOutlined from '@material-ui/icons/PersonAddOutlined';
+import MenuItem          from '@material-ui/core/MenuItem/MenuItem';
+import SelectErrorField  from './SelectErrorField';
+import FormControlLabel  from '@material-ui/core/FormControlLabel/FormControlLabel';
+import Checkbox          from '@material-ui/core/Checkbox/Checkbox';
 
 const styles = theme => {
   return {
@@ -72,25 +74,46 @@ const styles = theme => {
 class RegisterPage extends Component {
 
   state = {
+    // fields
     first_name: '',
     last_name: '',
     email: '',
     password: '',
+    phone_number: '',
+    school: '',
+    interest_drive: false,
+    interest_lead: false,
+    medical: '',
+
+    // DOM
     showPassword: false,
   };
 
   handleSubmit = e => {
     e.preventDefault();
+
+    // clean phone number '+1(123) 879-7867'.replace(/[^0-9+]/g, '')
+    let phone_number = this.state.phone_number.replace(/[^0-9+]/g, '');
+
     this.props.register(
       this.state.first_name,
       this.state.last_name,
       this.state.email,
       this.state.password,
+      phone_number,
+      this.state.school,
+      this.state.interest_drive,
+      this.state.interest_lead,
+      this.state.medical,
     );
   };
 
   handleChange = e => {
     this.setState({[e.target.name]: e.target.value});
+  };
+
+  handleCheckChange = e => {
+    this.setState({[e.target.value]: e.target.checked});
   };
 
   handleClickShowPassword = () => {
@@ -178,6 +201,86 @@ class RegisterPage extends Component {
                   </InputAdornment>,
               }}
             />
+
+            <TextErrorField
+              className={classes.field}
+              label='Phone Number'
+              variant='filled'
+              id='phone_number'
+              type='text'
+              errors={errors}
+              inputProps={{
+                inputProps: {
+                  value: this.state.phone_number,
+                },
+                onChange: this.handleChange,
+                endAdornment: undefined,
+                inputComponent: PhoneNumberMask,
+              }}
+              labelProps={{
+                shrink: true,
+              }}
+            />
+
+            <SelectErrorField
+              className={classes.field}
+              label="School"
+              variant="filled"
+              id="school"
+              errors={errors}
+              inputProps={{
+                onChange: this.handleChange,
+                value: this.state.school,
+              }}
+            >
+              <MenuItem value="CC">Columbia College</MenuItem>
+              <MenuItem value="SEAS">SEAS Undergraduate</MenuItem>
+              <MenuItem value="BARN">Barnard College</MenuItem>
+              <MenuItem value="GS">General Studies</MenuItem>
+              <MenuItem value="SEASGRAD">SEAS Graduate</MenuItem>
+              <MenuItem value="ARTSCIGRAD">Graduate School of Arts and Sciences</MenuItem>
+            </SelectErrorField>
+
+            <TextErrorField
+              className={classes.field}
+              label='Medical Concerns'
+              variant='filled'
+              id='medical'
+              type='text'
+              errors={errors}
+              inputProps={{
+                onChange: this.handleChange,
+                multiline: true,
+                rows: 7,
+                placeholder: 'Asthma, physical injury, allergies, ...',
+                required: false,
+              }}
+            />
+
+            <FormControlLabel
+              className={classes.field}
+              control={
+                <Checkbox
+                  value="interest_drive"
+                  checked={this.state.interest_drive}
+                  onChange={this.handleCheckChange}
+                />
+              }
+              label="I am 21, have a valid state driver's license, and would like to drive"
+            />
+
+            <FormControlLabel
+              className={classes.field}
+              control={
+                <Checkbox
+                  value="interest_lead"
+                  checked={this.state.interest_lead}
+                  onChange={this.handleCheckChange}
+                />
+              }
+              label="I have led a few hikes before and would like to lead hikes"
+            />
+
             {error_fields.includes('non_field_errors') && (
               <h5>{errors[error_fields.indexOf(
                 'non_field_errors')]['message']}</h5>
@@ -224,8 +327,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    register: (fname, lname, email, password) => {
-      return dispatch(auth.register(fname, lname, email, password));
+    register: (
+      fname, lname, email, password,
+      phone_number, school,
+      interest_drive, interest_lead,
+      medical) => {
+      return dispatch(auth.register(fname, lname, email, password,
+        phone_number, school, interest_drive, interest_lead, medical));
     },
   };
 };

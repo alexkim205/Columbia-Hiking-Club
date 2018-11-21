@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.conf import settings
 
@@ -26,8 +27,8 @@ class HikeBase(models.Model):
     )
 
     EXPOSED_FIELDS = [
-        'id', 'pub_date', 'date_of_hike', 'destination', 'description', 'difficulty',
-        'hike_leaders', 'travel', 'str_name'
+        'id', 'str_name', 'pub_date', 'date_of_hike', 'destination', 'description', 'difficulty',
+        'hike_leaders', 'travel',
     ]
     READONLY_FIELDS = ['id', 'pk', 'hike_leaders', 'pub_date', 'travel', 'str_name']
     READONLY_ADMIN_FIELDS = ['pub_date']
@@ -35,7 +36,7 @@ class HikeBase(models.Model):
     hike_leaders = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
     pub_date = models.DateTimeField('date published', auto_now_add=True)
     date_of_hike = models.DateTimeField('date and time of hike')
-    travel = models.CharField(max_length=200, choices=TRAVEL_CHOICES, default=VAN)
+    travel = models.CharField(max_length=200, choices=TRAVEL_CHOICES, default=NONE)
     destination = models.CharField(max_length=200)
     description = models.TextField()
     difficulty = models.CharField(max_length=30, choices=DIFFICULTY_CHOICES, default=EASY)
@@ -61,7 +62,32 @@ class HikeBase(models.Model):
 
 
 class Hike(HikeBase):
-    pass
+    # hikers = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=)
+    signup_limit = models.PositiveSmallIntegerField('Hikers limit', default=10)
+
+    def save(self, *args, **kwargs):
+        super().save()
+        self.set_max_hikers()
+
+    def set_max_hikers(self):
+        # super().clean()
+        # set max_hikers based on travel choice
+        if self.travel == self.BUS:
+            self.signup_limit = 14
+        elif self.travel == self.VAN:
+            self.signup_limit = 10
+        elif self.travel == self.TRAIN:
+            self.signup_limit = 9
+        else:
+            self.signup_limit = 10
+
+    def get_hikers(self):
+        return self.objects.hikes.all()
+
+    # def get_hike_leaders(self):
+    #     UserModel = get_user_model()
+    #     hike_leaders = [UserModel.objects.get(id=user_id) for user_id in self.hike_leaders]
+    #     return hike_leaders
 
 
 class HikeRequest(HikeBase):

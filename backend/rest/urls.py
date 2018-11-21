@@ -1,20 +1,23 @@
 from django.urls import path, include
 from blog.views import (
     HikesListAPI, HikeAPI,
-    HikeRequestsListAPI, HikeRequestAPI, HikeRequestFormAPI
+    HikeRequestsListAPI, HikeRequestAPI, HikeRequestFormAPI,
+    HikeRegisterFormAPI, HikeUnRegisterFormAPI
 )
 from accounts.views import (
     HikersAPI, HikerAPI, CurrentUserAPI,
     HikerRegisterAPI, HikerLoginAPI,
 )
 
-from rest_auth.views import LoginView, LogoutView
-# from rest_auth.registration.views import RegisterView
+from rest_auth.views import LogoutView
+
 
 urlpatterns = [
     # Hikes
     path('hikes/', HikesListAPI.as_view(), name='hike_list_api'),
     path('hikes/<int:pk>/', HikeAPI.as_view(), name='hike_api'),
+    path('hikes/<int:pk>/register', HikeRegisterFormAPI.as_view(), name='hike_register_api'),
+    path('hikes/<int:pk>/unregister', HikeUnRegisterFormAPI.as_view(), name='hike_unregister_api'),
     path('hike-reqs/', HikeRequestsListAPI.as_view(), name='hike_requests_api'),
     path('hike-reqs/<int:pk>', HikeRequestAPI.as_view(), name='hike_request_api'),
     path('hike-reqs/register/', HikeRequestFormAPI.as_view(), name='hike_request_form_api'),

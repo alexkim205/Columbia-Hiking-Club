@@ -9,20 +9,25 @@ import classNames                    from 'classnames';
 
 import { auth } from '../actions';
 
-import NavBar               from './NavBar';
-import PrivateRoute         from './PrivateRoute';
-import ProfilePage          from './ProfilePage';
-import LoginPage            from './LoginPage';
-import RegisterPage         from './RegisterPage';
-import HikesListPage        from './HikesListPage';
-import HikeRequestPage      from './HikeRequestPage';
-import NotFoundPage         from './NotFoundPage';
+import NavBar                 from './NavBar';
+import PrivateRoute           from './PrivateRoute';
+import ProfilePage            from './ProfilePage';
+import LoginPage              from './LoginPage';
+import RegisterPage           from './RegisterPage';
+import HikesListPage          from './HikesListPage';
+import HikeDetailPage         from './HikeDetailPage';
+import HikeRequestPage        from './HikeRequestPage';
+// import HikeRegisterPage       from './HikeRegisterPage';
+// import HikeUnRegisterPage     from './HikeUnRegisterPage';
+// import DifficultyPage         from './DifficultyPage';
+import HikeRequestSuccessPage from './HikeRequestSuccessPage';
+import NotFoundPage           from './NotFoundPage';
 
 import 'typeface-roboto';
-import theme                from '../styles/palette';
-import withStyles           from '@material-ui/core/styles/withStyles';
-import CssBaseline          from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import theme                  from '../styles/palette';
+import withStyles             from '@material-ui/core/styles/withStyles';
+import CssBaseline            from '@material-ui/core/CssBaseline';
+import { MuiThemeProvider }   from '@material-ui/core/styles';
 
 const styles = theme => ({
   content: {
@@ -68,7 +73,7 @@ class App extends Component {
                   handleDrawerOpen={this.handleDrawerOpen}
                   handleDrawerClose={this.handleDrawerClose}/>
           {/*<Sidebar/>*/}
-          <div className={classes.appBarSpacer}/>
+          {/*<div className={classes.appBarSpacer}/>*/}
           <main
             className={classNames(classes.content, {
               [classes.contentShift]: drawerOpen,
@@ -76,10 +81,14 @@ class App extends Component {
           >
             <Switch>
               <Route exact path="/" component={HikesListPage}/>
+              <Route path={`/hike/:id`} component={HikeDetailPage}/>
+              {/*<PrivateRoute path={`/hike/:id/register`}/>*/}
+              {/*<PrivateRoute path={`/hike/:id/unregister`}/>*/}
               <PrivateRoute path="/profile" component={ProfilePage}/>
               <Route path="/login" component={LoginPage}/>
               <Route path="/register" component={RegisterPage}/>
               <Route path="/hike-req" component={HikeRequestPage}/>
+              <PrivateRoute path={`/hike-req/:id`} component={HikeRequestSuccessPage}/>
               <Route component={NotFoundPage}/>
             </Switch>
           </main>

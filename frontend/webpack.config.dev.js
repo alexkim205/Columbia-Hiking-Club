@@ -7,7 +7,10 @@ import {
   backendPath,
   frontendPath,
   DEV_SERVER,
+  // DJANGO_SERVER
 }                              from './tools/exposePaths';
+
+const SERVE_PORT = DEV_SERVER
 
 export default {
   resolve: {
@@ -22,7 +25,7 @@ export default {
       // must be first entry to properly set public path
       './src/webpack-public-path',
       'react-hot-loader/patch',
-      `webpack-hot-middleware/client?path=${DEV_SERVER}__webpack_hmr&reload=true&__webpack_public_path=${DEV_SERVER}`,
+      `webpack-hot-middleware/client?path=${SERVE_PORT}__webpack_hmr&reload=true&__webpack_public_path=${SERVE_PORT}`,
       path.resolve(frontendPath, 'src/index.js'), // Defining path seems
       // necessary for this to work
       // consistently on Windows
@@ -35,7 +38,7 @@ export default {
     path: path.resolve(frontendPath, 'dist'), // Note: Physical files are only
                                               // output by the production build
                                               // task `npm run build`.
-    publicPath: DEV_SERVER,
+    publicPath: SERVE_PORT,
     filename: '[name].js',
   },
   plugins: [

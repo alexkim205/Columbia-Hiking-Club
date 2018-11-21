@@ -1,15 +1,24 @@
 from django.contrib import admin
+from django.contrib.auth import get_user_model
 
 from .models import Hike, HikeRequest
+
+UserModel = get_user_model()
+
 
 # Register your models here.
 
 my_models = [Hike, HikeRequest]
 
+#
+# class HikerInline(admin.StackedInline):
+#     model = UserModel
 
 @admin.register(Hike)
 class HikeAdmin(admin.ModelAdmin):
-    pass
+    inlines = [
+        # HikerInline
+    ]
 
 
 @admin.register(HikeRequest)

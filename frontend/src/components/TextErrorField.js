@@ -12,7 +12,9 @@ import FormHelperText from '@material-ui/core/FormHelperText/FormHelperText';
 
 const styles = theme => {
   return {
-    formControl: {},
+    formControl: {
+      padding: theme.spacing.unit,
+    },
   };
 };
 

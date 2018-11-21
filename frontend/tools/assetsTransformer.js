@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------
-// This is a fix for jest handling static assets like imported images
+// This is a fix for jest handling assets assets like imported images
 // when running tests. It's configured in jest section of package.json
 //
 // See:

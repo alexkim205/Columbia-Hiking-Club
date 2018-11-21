@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # 3rd Party
     'webpack_loader',
     'django_js_reverse',
+    'phonenumber_field',
     'rest_framework',
     'knox',
     # 'rest_auth',
@@ -139,8 +140,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 # https://medium.com/uva-mobile-devhub/set-up-react-in-your-django-project-with-webpack-4fe1f8455396
-
-STATIC_URL = '/static/'
+STATICFILES_FINDER = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+STATICFILES_DIR = [
+    os.path.join(FRONTEND_DIR, 'assets/')
+]
+STATIC_URL = '/assets/'
 STATIC_ROOT = os.path.join(FRONTEND_DIR, 'assets/')
 
 # WEBPACK
@@ -150,7 +157,6 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(FRONTEND_DIR, 'webpack-stats.json'),
     }
 }
-
 
 # User Login/Logout
 

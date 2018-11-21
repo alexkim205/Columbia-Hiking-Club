@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { withRouter }       from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { compose }          from 'redux';
 import PropTypes            from 'prop-types';
-import withStyles
-                            from '@material-ui/core/styles/withStyles';
 import { hot }              from 'react-hot-loader';
-
 import { XMasonry, XBlock } from 'react-xmasonry/dist/index.js'; // Imports precompiled bundle
 
+import { prettifyShortDate } from '../helpers/prettifyDate';
+import stringToImage         from '../helpers/stringToImage';
+
+import withStyles     from '@material-ui/core/styles/withStyles';
 import CardActionArea from '@material-ui/core/CardActionArea/CardActionArea';
 import CardMedia      from '@material-ui/core/CardMedia/CardMedia';
 import CardContent    from '@material-ui/core/CardContent/CardContent';
@@ -42,7 +43,16 @@ class HikesGrid extends Component {
     hikeData.forEach((e) => {
       e['width'] = (Date.parse(e.date_of_hike) > new Date()) ? 2 : 1;
     });
+    hikeData.sort(this.compare);
     return hikeData;
+  };
+
+  compare = (a, b) => {
+    if (a.date_of_hike < b.date_of_hike)
+      return 1;
+    if (a.date_of_hike > b.date_of_hike)
+      return -1;
+    return 0;
   };
 
   render () {
@@ -56,30 +66,29 @@ class HikesGrid extends Component {
           (
             <XBlock key={tile.id} width={tile.width} className={classes.xblock}>
               <Card className={classes.tile}>
-                <CardActionArea>
+                <CardActionArea
+                  component={Link}
+                  to={`/hike/${tile.id}`}
+                >
                   <CardMedia
                     className={classes.media}
-                    image="https://home.nps.gov/kefj/planyourvisit/images/KEFJ_web_2012_Miscellaneous_425_marmot_meadows_North_1.jpg"
-                    title="Contemplative Reptile"
+                    image={stringToImage(tile.destination)}
                   />
                   <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography gutterBottom variant="h6" component="h2">
                       {tile.str_name}
                     </Typography>
                     <Typography variant="subtitle1">
-                      {tile.date_of_hike}
-                    </Typography>
-                    <Typography component="p">
-                      {tile.description}
+                      {prettifyShortDate(tile.date_of_hike)}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
                 <CardActions className={classes.cardactions}>
-                  <Button size="small" color="primary">
+                  <Button
+                    size="small"
+                    color="primary"
+                  >
                     Sign Up
-                  </Button>
-                  <Button size="small" color="primary">
-                    Learn More
                   </Button>
                 </CardActions>
               </Card>

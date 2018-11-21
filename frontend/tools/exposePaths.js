@@ -19,3 +19,4 @@ export const DJANGO_PORTS = {
 
 export const DEV_SERVER = `http://localhost:${DEV_PORTS.server}/`;
 export const BULID_SERVER = `http://localhost:${BUILD_PORTS.server}/`;
+export const DJANGO_SERVER = `http://localhost:${DJANGO_PORTS.server}/`;

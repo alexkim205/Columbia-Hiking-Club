@@ -6,6 +6,7 @@ import PropTypes            from 'prop-types';
 import { hot }              from 'react-hot-loader';
 
 import { hike } from '../actions';
+import Loader   from './Loader';
 
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -53,17 +54,15 @@ class HikesListPage extends Component {
 
     return (
       <React.Fragment>
-        <Typography component="h1" variant="h2">
-          Hikes
-        </Typography>
-        <div className={classes.titleSpacer}/>
+        {/*<Typography component="h1" variant="h2">*/}
+        {/*Hikes*/}
+        {/*</Typography>*/}
+        {/*<div className={classes.titleSpacer}/>*/}
         <div className={classes.root}>
           {hikeReceived ? (
             <HikesGrid hikeData={hikeData}></HikesGrid>
           ) : (
-            <Typography variant="body1">
-              Loading...
-            </Typography>
+            <Loader/>
           )}
         </div>
       </React.Fragment>

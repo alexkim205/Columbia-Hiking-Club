@@ -105,6 +105,12 @@ class HikerRegisterAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+
+        # add to hikers group
+        hikers_group = Group.objects.get(name='Hikers')
+        hikers_group.user_set.add(user)
+
+
         return Response({
             "user": HikerSerializer(user, context=self.get_serializer_context()).data,
             "token": AuthToken.objects.create(user)

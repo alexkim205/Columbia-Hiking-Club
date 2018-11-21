@@ -10,7 +10,7 @@ import historyApiFallback   from 'connect-history-api-fallback';
 import webpack              from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import httpProxyMiddleware  from 'http-proxy-middleware';
+// import httpProxyMiddleware  from 'http-proxy-middleware';
 import config               from '../webpack.config.dev';
 import {
   DEV_PORTS,
@@ -55,13 +55,13 @@ browserSync({
       // bundler should be the same as above
       webpackHotMiddleware(bundler),
 
-      // proxy to localhost:/django
-      httpProxyMiddleware('/', {
-        target: config.output.publicPath,
-        ws: true,
-        logLevel: 'error',
-        changeOrigin: true,
-      }),
+      // // proxy to localhost:/django
+      // httpProxyMiddleware('/', {
+      //   target: config.output.publicPath,
+      //   ws: true,
+      //   logLevel: 'error',
+      //   changeOrigin: true,
+      // }),
     ],
   },
 

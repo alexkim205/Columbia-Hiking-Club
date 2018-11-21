@@ -72,7 +72,7 @@ const styles = theme => {
   };
 };
 
-class HikeRequestPage extends Component {
+class HikeRegisterPage extends Component {
 
   state = {
     'date_of_hike': moment().format('MM/DD/YYYY HH:mm'),
@@ -236,16 +236,6 @@ class HikeRequestPage extends Component {
               </Button>
             </div>
 
-            {/*{requestSuccessful ? (*/}
-            {/*<Typography variant="body1">*/}
-            {/*Request successful*/}
-            {/*</Typography>*/}
-            {/*) : (*/}
-            {/*<Typography variant="body1">*/}
-            {/*Loading...*/}
-            {/*</Typography>*/}
-            {/*)}*/}
-
           </form>
         </Paper>
         {/*)}*/}
@@ -254,7 +244,7 @@ class HikeRequestPage extends Component {
   }
 }
 
-HikeRequestPage.propTypes = {
+HikeRegisterPage.propTypes = {
   classes: PropTypes.object,
 };
 
@@ -297,4 +287,4 @@ export default compose(
   withRouter,
   withStyles(styles),
   connect(mapStateToProps, mapDispatchToProps),
-)(HikeRequestPage);
+)(HikeRegisterPage);

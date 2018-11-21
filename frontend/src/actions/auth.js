@@ -45,7 +45,7 @@ export const login = (email, password) => {
             return {status: res.status, data};
           });
         } else {
-          console.log('Server Error!');
+          // console.log('Server Error!');
           throw res;
         }
       }).
@@ -64,10 +64,22 @@ export const login = (email, password) => {
   };
 };
 
-export const register = (first_name, last_name, email, password) => {
+export const register = (
+  first_name, last_name, email, password, phone_number, school, interest_drive, interest_lead,
+  medical) => {
   return (dispatch, getState) => {
     let headers = {'Content-Type': 'application/json'};
-    let body = JSON.stringify({first_name, last_name, email, password});
+    let body = JSON.stringify({
+      first_name,
+      last_name,
+      email,
+      password,
+      phone_number,
+      school,
+      interest_drive,
+      interest_lead,
+      medical,
+    });
 
     return fetch('/api/auth/register/', {headers, body, method: 'POST'}).
       then(res => {
@@ -76,7 +88,7 @@ export const register = (first_name, last_name, email, password) => {
             return {status: res.status, data};
           });
         } else {
-          console.log('Server Error!');
+          // console.log('Server Error!');
           throw res;
         }
       }).
@@ -108,7 +120,7 @@ export const logout = () => {
             return {status: res.status, data};
           });
         } else {
-          console.log('Server Error!');
+          // console.log('Server Error!');
           throw res;
         }
       }).
