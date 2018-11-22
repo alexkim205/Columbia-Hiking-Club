@@ -27,65 +27,6 @@ import ListItem              from '@material-ui/core/ListItem';
 import ListItemText          from '@material-ui/core/ListItemText';
 import Button                from '@material-ui/core/Button';
 
-const temphikedata = {
-  'id': 53,
-  'str_name': 'Alex\'s Hike to Disney World',
-  'pub_date': '2018-11-05T08:02:17.572085Z',
-  'date_of_hike': '2018-11-05T08:02:10Z',
-  'destination': 'Disney World',
-  'description': 'The Walt Disney World Resort, also called Walt Disney World and Disney World, is an entertainment complex in Bay Lake and Lake Buena Vista, Florida, in the United States, near the cities Orlando and Kissimmee. Opened on October 1, 1971, the resort is owned and operated by Walt Disney Parks, Experiences and Consumer Products, a division of The Walt Disney Company. It was first operated by Walt Disney World Company. The property covers nearly 25,000 acres (39 sq mi; 101 km2) and only half of it has been used,[2] comprises four theme parks, two water parks, twenty-seven themed resort hotels, nine non-Disney hotels, several golf courses, a camping resort, and other entertainment venues, including the outdoor shopping center Disney Springs.',
-  'difficulty': 'EASY',
-  'hike_leaders': [
-    {
-      'first_name': 'Alex',
-      'last_name': 'Lee',
-      'email': 'alexlee@gmail.com',
-      'password': 'pbkdf2_sha256$120000$ghZXnlGZL4qK$35tvba0X2iLW3pg7iIWW5IyrauahBiNhlAdZ66sCUT0=',
-      'school': 'CC',
-      'phone_number': '+17187100555',
-      'hikes': null,
-      'interest_lead': null,
-      'interest_drive': null,
-    },
-  ],
-  'travel': 'VAN',
-  'hikers': [
-    {
-      'first_name': 'Johnny',
-      'last_name': 'Pak',
-      'email': 'derp@derp.com',
-      'password': 'pbkdf2_sha256$120000$UHL5dtscLx4i$AMb7q62QDfVm8s2mgHsCls2B37Zv4/nlGjQ84DBiEyY=',
-      'school': 'CC',
-      'phone_number': '+17187100555',
-      'hikes': 53,
-      'interest_lead': true,
-      'interest_drive': null,
-    },
-    {
-      'first_name': 'Alex',
-      'last_name': 'Kim',
-      'email': 'agk2144@columbia3.edu',
-      'password': 'pbkdf2_sha256$120000$Pw2l7BHipyWe$BkpFKdMoi/v4TqSpuce2afH5NvP0HGXCnW6+rxMyX/I=',
-      'school': 'VAN',
-      'phone_number': '+17187100555',
-      'hikes': 53,
-      'interest_lead': true,
-      'interest_drive': null,
-    },
-    {
-      'first_name': 'Dick',
-      'last_name': 'dick',
-      'email': 'dick@dick.edu',
-      'password': 'pbkdf2_sha256$120000$LpIqyPGx593W$xgELd4hn7Vs/YZBO5ZOLqJ0eZxwHf6afBy4cE6D1FW4=',
-      'school': 'NONE',
-      'phone_number': '+17187100555',
-      'hikes': 53,
-      'interest_lead': null,
-      'interest_drive': null,
-    },
-  ],
-};
-
 const styles = theme => {
   return {
     hikeImage: {
@@ -223,11 +164,27 @@ const styles = theme => {
 
 class HikeDetailPage extends Component {
 
-  static defaultProps = {};
+  static defaultProps = {
+    requestData: null,
+  };
+
+  UNSAFE_componentWillMount () {
+    const {id} = this.props.match.params; // ugly make prop
+    this.props.resetPage();
+    this.props.getHike(id);
+  }
+
+  componentWillUnmount() {
+    this.props.resetPage();
+  }
 
   componentDidMount () {
-    const {id} = this.props.match.params; // ugly make prop
-    this.props.getHike(id);
+    const {requestData, user, isAuthenticated} = this.props;
+    if (requestData && isAuthenticated) {
+      const {hikers} = requestData;
+      this.props.initRegister(hikers.map(obj => {return obj.email;}).includes(user.email));
+    }
+    // this.setState({isRegistered: this.props.})
   }
 
   handleChange = panel => (event, expanded) => {
@@ -239,13 +196,16 @@ class HikeDetailPage extends Component {
   handleRegister = (e) => {
     e.preventDefault();
     const {id} = this.props.match.params; // ugly make prop
-    this.props.hikeRegister(id);
+    const msg = this.props.hikeRegister(id);
+    this.props.getHike(id);
+    // console.log(msg);
   };
 
   handleUnregister = (e) => {
     e.preventDefault();
     const {id} = this.props.match.params; // ugly make prop
     this.props.hikeUnregister(id);
+    this.props.getHike(id);
   };
 
   state = {
@@ -257,8 +217,9 @@ class HikeDetailPage extends Component {
 
     const {
       classes,
-      isRegistered,
+      user,
       requestData,
+      isAuthenticated,
     } = this.props;
 
     if (requestData == null) {
@@ -269,14 +230,14 @@ class HikeDetailPage extends Component {
       );
     }
 
-    // const {classes} = this.props;
-    // const requestData = temphikedata;
-
-    const {expanded} = this.state;
     const {
       str_name, id, pub_date, destination, hike_leaders,
       date_of_hike, description, difficulty, hikers, travel,
     } = requestData;
+
+    // this.props.initRegister(hikers.map(obj => {return obj.email;}).includes(user.email));
+
+    const isRegistered = this.props.isRegistered;
 
     const readable_difficulty = difficulty.toLowerCase();
     const readable_travel = travel.toLowerCase();
@@ -289,29 +250,7 @@ class HikeDetailPage extends Component {
                  backgroundImage: `url(${stringToImage(destination)})`,
                }}
         />
-        <Paper className={classes.paper}>
-          {isRegistered ? (
-            <div className={classes.difficulty}>
-              <Button
-                color="secondary"
-                onClick={this.handleUnregister}
-                className={classes.button}
-              >
-                Unregister from this hike.
-              </Button>
-            </div>
-          ) : (
-            <div className={classes.difficulty}>
-              <Button
-                color="primary"
-                onClick={this.handleRegister}
-                className={classes.button}
-              >
-                Register for this hike.
-              </Button>
-            </div>
-          )}
-        </Paper>
+
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h3" className={classes.hikeTitle}>
             {str_name}
@@ -334,6 +273,39 @@ class HikeDetailPage extends Component {
               the <strong>{readable_travel}</strong> to get there. {description}
             </Typography>
           </div>
+          <div className={classes.register}>
+            {isAuthenticated ? (
+              <React.Fragment>
+                {isRegistered ? (
+                  <div className={classes.difficulty}>
+                    <Button
+                      color="secondary"
+                      variant="contained"
+                      onClick={this.handleUnregister}
+                      className={classes.button}
+                    >
+                      Unregister from this hike.
+                    </Button>
+                  </div>
+                ) : (
+                  <div className={classes.difficulty}>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={this.handleRegister}
+                      className={classes.button}
+                    >
+                      Register for this hike.
+                    </Button>
+                  </div>
+                )}
+              </React.Fragment>
+            ) : (
+              <Typography component="h1" variant="h4" className={classes.hikeTitle}>
+                You must sign in to register for this hike.
+              </Typography>
+            )}
+          </div>
         </Paper>
         <Paper className={classes.paper}>
           <div className={classes.who}>
@@ -342,9 +314,9 @@ class HikeDetailPage extends Component {
             </Typography>
             {hike_leaders && hike_leaders.map(hiker => (
               <ExpansionPanel
+                key={hiker.id}
                 className={classes.leader}
                 defaultExpanded
-                key={hiker.id}
               >
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
                   <Avatar className={classes.leaderBadge}>
@@ -426,12 +398,18 @@ class HikeDetailPage extends Component {
 
 HikeDetailPage.propTypes = {
   classes: PropTypes.object.isRequired,
+  requestData: PropTypes.object,
+  user: PropTypes.object,
+  isRegistered: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => {
   return {
+    user: state.auth.user,
     requestData: state.hike.hike,
     isRegistered: state.hike.isRegistered,
+    isAuthenticated: state.auth.isAuthenticated,
   };
 };
 
@@ -440,6 +418,8 @@ const mapDispatchToProps = dispatch => {
     getHike: (id) => dispatch(hike.getHike(id)),
     hikeRegister: (id) => dispatch(hike.hikeRegister(id)),
     hikeUnregister: (id) => dispatch(hike.hikeUnregister(id)),
+    initRegister: (isRegistered) => dispatch(hike.initRegister(isRegistered)),
+    resetPage: () => dispatch({type: 'RESET_HIKE_STATE'}),
   };
 };
 

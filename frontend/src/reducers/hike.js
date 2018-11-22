@@ -3,7 +3,7 @@ const initialState = {
   hikeReceived: false,
   hikeReqIsLoading: true,
   hikeReqReceived: false,
-  isRegistered: false,
+  isRegistered: null,
   hikes: null,
   hike: null,
   hikeReq: null,
@@ -14,12 +14,14 @@ const initialState = {
 export default function hike (state = initialState, action) {
   // console.log(state);
   switch (action.type) {
+    case 'RESET_HIKE_STATE':
+      return initialState;
+
     case 'HIKE_LOADING':
       return {
         ...state,
         hikeIsLoading: true,
         hikeReceived: false,
-        isRegistered: false,
       };
 
     case 'HIKES_LOADED':
@@ -77,7 +79,7 @@ export default function hike (state = initialState, action) {
       return {
         ...state,
         isRegistered: true,
-      }
+      };
 
     case 'REGISTER_UNSUCCESSFUL':
     case 'UNREGISTER_SUCCESSFUL':

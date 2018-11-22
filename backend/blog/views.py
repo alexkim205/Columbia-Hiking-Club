@@ -87,6 +87,7 @@ class HikeRegisterFormAPI(generics.GenericAPIView):
 
     def put(self, request, pk, *args, **kwargs):
         user = request.user
+        time = timezone.datetime.now()
         hike = Hike.objects.get(pk=pk)
         members_group = Group.objects.get(name='Members')
 
@@ -103,10 +104,15 @@ class HikeRegisterFormAPI(generics.GenericAPIView):
                            "business days to process your membership."
             }, status=status.HTTP_403_FORBIDDEN)
 
+        # user['register_time'] = time
+        # old_order = hike.get_hikeuser_order()
         hike.hikes.add(user)
+        # new_order = old_order.append(user.pk)
+        # hike.set_hikeuser_order(new_order)
 
         try:
             hike.save()
+
         except:
             return Response({
                 'message': 'There was an error registering for this hike.'

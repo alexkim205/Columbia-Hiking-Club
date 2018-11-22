@@ -65,9 +65,14 @@ class Hike(HikeBase):
     # hikers = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=)
     signup_limit = models.PositiveSmallIntegerField('Hikers limit', default=10)
 
+    new_fields = ['signup_limit']
+    EXPOSED_FIELDS = HikeBase.EXPOSED_FIELDS + new_fields
+    READONLY_FIELDS = HikeBase.READONLY_FIELDS + [new_fields[0]]
+    READONLY_ADMIN_FIELDS = HikeBase.READONLY_ADMIN_FIELDS + [new_fields[0]]
+
     def save(self, *args, **kwargs):
-        super().save()
         self.set_max_hikers()
+        super().save()
 
     def set_max_hikers(self):
         # super().clean()

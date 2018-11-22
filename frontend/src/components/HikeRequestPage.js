@@ -83,6 +83,10 @@ class HikeRequestPage extends Component {
     'shouldRedirect': false,
   };
 
+  UNSAFE_componentWillMount () {
+    this.props.resetPage();
+  }
+
   handleSubmit = e => {
     e.preventDefault();
 
@@ -128,12 +132,6 @@ class HikeRequestPage extends Component {
 
     return (
       <React.Fragment>
-        {/*/!* If the request was successfully submitted show success *!/*/}
-        {/*{this.props.requestSuccessful ? (*/}
-        {/*<React.Fragment>*/}
-        {/*<HikeRequestSuccess hikeID={id}/>*/}
-        {/*</React.Fragment>*/}
-        {/*) : (*/}
         <Paper className={classes.paper}>
           <div className={classes.formTitle}>
             <Avatar className={classes.avatar}>
@@ -290,6 +288,7 @@ const mapDispatchToProps = dispatch => {
         want_to_lead,
       ));
     },
+    resetPage: () => dispatch({type: 'RESET_HIKE_STATE'}),
   };
 };
 

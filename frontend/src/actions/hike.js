@@ -154,7 +154,7 @@ export const hikeRegister = (id) => {
         }
       }).
       then(res => {
-        if (res.status === 201 || res.status === 200) {
+        if (res.status === 202) {
           dispatch({type: 'REGISTER_SUCCESSFUL', hikes: res.data});
           return res.data;
         } else if (res.status >= 400 && res.status < 500) {
@@ -168,14 +168,17 @@ export const hikeRegister = (id) => {
 export const hikeUnregister = (id) => {
   return (dispatch, getState) => {
 
+    // Get Authentication Token
+    const token = getState().auth.token;
+
     let headers = {
       'Content-type': 'application/json',
     };
-    // let body = JSON.stringify({
-    //   hike,
-    // });
+    if (token) {
+      headers['Authorization'] = `Token ${token}`;
+    }
 
-    return fetch(`/api/hikes/${id}/unregister`, {headers, body, method: 'PATCH'}).
+    return fetch(`/api/hikes/${id}/unregister`, {headers, method: 'PUT'}).
       then(res => {
         if (res.status < 500) {
           return res.json().then(data => {
@@ -187,7 +190,7 @@ export const hikeUnregister = (id) => {
         }
       }).
       then(res => {
-        if (res.status === 201 || res.status === 200) {
+        if (res.status === 202) {
           dispatch({type: 'UNREGISTER_SUCCESSFUL', hikes: res.data});
           return res.data;
         } else if (res.status >= 400 && res.status < 500) {
@@ -195,5 +198,15 @@ export const hikeUnregister = (id) => {
           throw res.data;
         }
       });
+  };
+};
+
+export const initRegister = (isRegistered) => {
+  return (dispatch, getState) => {
+    if (isRegistered) {
+      dispatch({type: 'REGISTER_SUCCESSFUL'})
+    } else {
+      dispatch({type: 'REGISTER_UNSUCCESSFUL'})
+    }
   };
 };

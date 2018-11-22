@@ -38,7 +38,7 @@ const styles = theme => {
 
 class HikesListPage extends Component {
 
-  componentWillMount () {
+  UNSAFE_componentWillMount () {
     this.setState({hikes: this.props.getHikes()});
   }
 

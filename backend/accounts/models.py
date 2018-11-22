@@ -68,6 +68,7 @@ class HikeUser(AbstractUser):
         "I have led a few hikes before and would like to lead some hikes for the hiking club", blank=True, null=True, )
     hikes = models.ForeignKey(Hike, related_name='hikes', on_delete=models.SET_NULL,
                               blank=True, null=True)
+    # register_time = OneToOneField(Hike, related_name='register_time', on_delete=models.CASCADE)
     medical = models.CharField(max_length=500, blank=True, null=True)
 
     # https://webtrac.cuit.columbia.edu/wbwsc/webtrac.wsc/search.html?display=detail&module=AR&primarycode=44XX
@@ -79,6 +80,9 @@ class HikeUser(AbstractUser):
     ]
 
     objects = UserManager()
+
+    class Meta:
+        order_with_respect_to = 'hikes'
 
 
 def __str__(self):
